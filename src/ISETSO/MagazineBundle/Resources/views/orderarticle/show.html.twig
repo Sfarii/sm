@@ -1,0 +1,163 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets 
+        'bundles/isetsomagazine/plugins/datatables/dataTables.bootstrap.css'
+        'bundles/isetsomagazine/plugins/datatables/dataTables.themify.css'
+        filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+    
+{% endblock %}
+{% block breadcrumb %}
+    <a href="{{ path('orderarticle_index') }}">
+       {{ 'orderarticle.list.name'|trans }}
+    </a>
+{% endblock %}
+     {% block breadcrumbActive %}{{ 'orderarticle.show.name'|trans }}{% endblock %}
+{% block body %}
+<div class="col-sm-12">
+    <div class="btn-group">
+        <a name="print" href="?print=true" onclick="window.open(this.href); return false;" class="btn btn-warning-alt">
+        <i class="ti ti-printer"></i>
+        </a>
+    
+        <a href="{{ path('orderarticle_edit', { 'id': orderArticle.id }) }}" class="btn btn-info-alt"><i class="ti ti-pencil-alt"></i></a>
+    </div>
+    <hr>    
+</div>
+<div class="col-sm-6">
+    <div class="tab-content">
+        <div class="tab-pane active" id="tab-about">
+            <div class="panel panel-default" style="visibility: visible; opacity: 1; display: block; transform: translateY(0px);">
+                <div class="panel-heading">
+                    <h2>{{ 'orderarticle.show.name'|trans }}</h2>
+                </div>
+                <div class="panel-body">
+                    <div class="about-area">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tbody>
+                                  <tr>
+                                    <th class="text text-primary">{{ 'magazine.field.date'|trans }}</th>
+                                    <td>
+                                        {% if orderArticle.date %}
+                                            {{ orderArticle.date|date('Y-m-d H:i:s') }}
+                                        {% endif %}
+                                    </td>
+                                  </tr>
+                                  
+                                  <tr>
+                                    <th class="text text-primary">{{ 'magazine.field.observation'|trans }}</th>
+                                    <td>{{ orderArticle.observation }}</td>
+                                  </tr>
+                                  
+                                  
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-sm-6">
+    <div class="tab-content">
+        <div class="tab-pane active" id="tab-about">
+            <div class="panel panel-default" style="visibility: visible; opacity: 1; display: block; transform: translateY(0px);">
+                <div class="panel-heading">
+                    <h2>{{ 'magazine.field.userName'|trans }}</h2>
+                </div>
+                <div class="panel-body">
+                    <div class="about-area">
+                        <div class="table-responsive">
+                            <table class="table">
+                            <tbody>
+                                <tr>
+                                <th class="text text-primary">{{ 'magazine.field.firstName'|trans }}</th>
+                                <td>
+                                    {% if orderArticle.user.firstName == null%}
+                                        <div class="text text-capitalize text-danger"> {{  'user.noInfo'|trans }} </div>
+                                    {% else %}
+                                        {{ orderArticle.user.firstName }}
+                                    {% endif %}
+                                </td>
+                              </tr>
+                              <tr>
+                                <th class="text text-primary">{{ 'magazine.field.lastName'|trans }}</th>
+                                <td>
+                                    {% if orderArticle.user.lastName == null%}
+                                        <div class="text text-capitalize text-danger"> {{  'user.noInfo'|trans }} </div>
+                                    {% else %}
+                                        {{ orderArticle.user.lastName }}
+                                    {% endif %}
+                                </td>
+                              </tr>
+                              <tr>
+                                <th class="text text-primary">{{ 'profile.show.username'|trans({}, 'FOSUserBundle') }}</th>
+                                <td>{{ orderArticle.user.username }}</td>
+                              </tr>
+                              <tr>
+                                <th class="text text-primary">{{ 'profile.show.email'|trans({}, 'FOSUserBundle') }}</th>
+                                <td>{{ orderArticle.user.email }}</td>
+                              </tr>
+                              
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-sm-12">
+    <div data-widget-group="group1">
+            <div class="panel panel-default" >
+                <div class="panel-heading">
+                    <h2><i class="ti ti-pencil-alt"></i> {{ 'detail.list.name'|trans }}</h2>
+                    <div class="panel-ctrls search"></div>
+                </div>
+                <div class="panel-editbox" data-widget-controls=""></div>
+                <div class="panel-body no-padding">
+                <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th class="text text-primary">{{ 'magazine.field.designation'|trans }}</th>
+                            <th class="text text-primary">{{ 'magazine.field.quantity'|trans }}</th>
+                            <th class="text text-primary">{{ 'magazine.field.unit'|trans }}</th>
+                            <th class="text text-primary">{{ 'magazine.field.family'|trans }}</th>
+                            <th class="text text-primary">{{ 'magazine.field.subFamily'|trans }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        {% for detail in orderArticle.detail %}
+                            <tr>
+                                <td>{{ detail.article.designation }}</td>
+                                <td>{{ detail.quantity }}</td>
+                                <td>{{ detail.article.unit.designation }}</td>
+                                <td>{{ detail.article.subFamily.designation }}</td>
+                                <td>{{ detail.article.subFamily.family.designation }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="panel-footer footer-dataTable"></div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts filter='?yui_js'
+        'bundles/isetsomagazine/plugins/datatables/jquery.dataTables.js'
+        'bundles/isetsomagazine/plugins/datatables/dataTables.bootstrap.js'
+        'bundles/isetsomagazine/myjs/datatables.js'
+    %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

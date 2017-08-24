@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets 
+        'bundles/isetsomagazine/plugins/form-multiselect/css/multi-select.css'
+        'bundles/isetsomagazine/plugins/form-select2/select2.css'
+        filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}     
+{% endblock %}
+{% block breadcrumb %}
+    <a href="{{ path('usergroup_index') }}">
+       {{ 'usergroup.list.name'|trans }}
+    </a>
+{% endblock %}
+     {% block breadcrumbActive %}{{ 'usergroup.new.name'|trans }}{% endblock %}
+{% block body %}
+    {% include 'Template/SingleFormTemplate.html.twig' with {'form': form ,'form_name' : 'usergroup.new.name'|trans ,'submit_name': 'usergroup.new.submit'|trans } %}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts filter='?yui_js'
+        'bundles/isetsomagazine/plugins/form-multiselect/js/jquery.multi-select.min.js'
+        'bundles/isetsomagazine/plugins/iCheck/icheck.js'
+        'bundles/isetsomagazine/plugins/form-select2/select2.min.js'
+    %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <script type="text/javascript">
+        $('select').multiSelect();
+    </script>
+{% endblock %}

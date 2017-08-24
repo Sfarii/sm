@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets 
+        'bundles/isetsomagazine/plugins/datatables/dataTables.bootstrap.css'
+        'bundles/isetsomagazine/plugins/datatables/dataTables.themify.css'
+        'bundles/isetsomagazine/plugins/form-select2/select2.css'
+        'bundles/isetsomagazine/css/cssload-finger.css'
+        'bundles/isetsomagazine/css/book-animation.css'
+        filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+    
+{% endblock %}
+{% block breadcrumb %}
+    <a href="{{ path('returnarticle_subStore_index', { 'id' : store.id}) }}">
+       {{ 'returnarticle.list.name'|trans }}
+    </a>
+{% endblock %}
+{% block breadcrumbActive %}
+    {{ 'returnarticle.new.name'|trans }}
+{% endblock %}
+{% block body %}
+    {% include 'Template/returnArticleFormTemplate.html.twig' with {'form_name' : 'returnarticle.new.name'|trans ,'submit_name': 'returnarticle.new.submit'|trans } %}
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts filter='?yui_js'
+        'bundles/isetsomagazine/plugins/datatables/jquery.dataTables.js'
+        'bundles/isetsomagazine/plugins/datatables/dataTables.bootstrap.js'
+        'bundles/isetsomagazine/myjs/datatables.js'
+        'bundles/isetsomagazine/plugins/form-select2/select2.min.js'
+        'bundles/isetsomagazine/myPlugins/return_article.js'
+        'bundles/isetsomagazine/myjs/add_return_article_toSubStore.js'
+        'bundles/isetsomagazine/plugins/form-daterangepicker/moment.min.js'
+        'bundles/isetsomagazine/plugins/bootstrap-datepicker/bootstrap-datepicker.js'
+        'bundles/isetsomagazine/myjs/date.js'
+    %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+ {% endblock %}

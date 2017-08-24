@@ -1,0 +1,1 @@
+$('#datepicker-range').datepicker({todayHighlight: true , format: 'yyyy-mm-dd'});

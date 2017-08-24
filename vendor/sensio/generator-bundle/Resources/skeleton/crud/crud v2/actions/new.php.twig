@@ -1,0 +1,107 @@
+
+    /**
+{% block phpdoc_method_header %}
+     * Creates a new {{ entity }} entity.
+{% endblock phpdoc_method_header %}
+     *
+{% block phpdoc_method_annotations %}
+{% if 'annotation' == format %}
+     * @Route("/new/{id}",defaults= {"id" = 0 }, name="{{ route_name_prefix }}_new")
+     * @Method({"GET", "POST"})
+{% endif %}
+{% endblock phpdoc_method_annotations %}
+     */
+{% block method_definition %}
+    public function newAction(Request $request,$id)
+{% endblock method_definition %}
+    {
+{% block method_body %}
+        ${{ entity_singularized }} = new {{ entity_class }}();
+        $form = $this->createForm('{{ namespace }}\Form\{{ entity_class }}Type', ${{ entity_singularized }});
+        $form->handleRequest($request);
+
+        $detail = new DetailReturnartIcle();
+        
+        $formDetail = $this->createForm('ISETSO\MagazineBundle\Form\DetailReturnArticleType', $detail);
+        $formDetail->handleRequest($request);
+
+        $session = $this->getRequest()->getSession();
+        if (!$session->has('detailReturn')){
+            $session->set('detailReturn', new ArrayCollection());
+        }
+
+        $listDetailOrder = $session->get('detailReturn');
+
+        $supportDocManager = $this->container->get("supportingDocument_manager");
+
+        if ($formDetail->isSubmitted() && $formDetail->isValid()) {
+            if ($id == 0){
+                if ($supportDocManager->newSupportingDocumentSaveInSession($detail,$listDetailOrder)){
+                     $this->addFlash(
+                        'msg',
+                        $this->get('translator')->trans('SupportingDocument.flash.created')
+                    );
+                }else{
+                     $this->addFlash(
+                        'msgError',
+                        $this->get('translator')->trans('SupportingDocument.flash.exist')
+                    );
+                }
+            }else{
+                if ($supportDocManager->editSupportingDocumentSaveInSession($detail,$listDetailOrder,$id)){
+
+                    $this->addFlash(
+                        'msg',
+                        $this->get('translator')->trans('SupportingDocument.flash.updated')
+                    );
+            
+                }else{
+                    $this->addFlash(
+                            'msgError',
+                            $this->get('translator')->trans('SupportingDocument.flash.exist')
+                    );  
+                }
+            }
+            return $this->redirectToRoute('{{ route_name_prefix }}_new');
+        }
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            ${{ entity_singularized }}->setUser($this->container->get('security.context')->getToken()->getUser());
+
+            foreach ($listDetailOrder as $value) {
+                $value->setArticle($em->getRepository('ISETSOMagazineBundle:Article')->find($value->getArticle()->getId()));
+                $em->persist($value);
+                ${{ entity_singularized }}->addDetail($value);
+                
+            }
+            $em->persist(${{ entity_singularized }});
+            $em->flush();
+            $session->set('detailReturn', new ArrayCollection());
+            $this->addFlash(
+                    'msg',
+                    $this->get('translator')->trans('JournalConsumable.flash.created')
+            );
+            
+            return $this->redirectToRoute('{{ route_name_prefix }}_index');
+            
+
+        }
+
+        $deleteForms = array();
+        foreach ($listDetailOrder as $entity) {
+            $deleteForms[$entity->getArticle()->getId()] = $this->createDeleteFormDetail($entity->getArticle()->getId())->createView();
+        }
+
+{% endblock method_body %}
+
+{% block method_return %}
+        return $this->render('{{ entity|lower|replace({'\\': '/'}) }}/new.html.twig', array(
+            '{{ entity_singularized }}' => ${{ entity_singularized }},
+            'form' => $form->createView(),
+            'formDetail'=> $formDetail->createView(),
+            'detail'=> $listDetailOrder,
+            'deleteForms' => $deleteForms
+        ));
+{% endblock method_return %}
+    }

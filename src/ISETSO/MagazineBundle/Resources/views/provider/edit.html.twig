@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block breadcrumb %}
+    <a href="{{ path('provider_index') }}">
+       {{ 'provider.list.name'|trans }}
+    </a>
+{% endblock %}
+
+{% block breadcrumbActive %}
+    {{ 'provider.edit.name'|trans }}
+{% endblock %}
+
+{% block body %}
+    {% include 'Template/SingleFormTemplate.html.twig' with {'form': edit_form ,'form_name' : 'provider.edit.name'|trans ,'submit_name': 'provider.edit.submit'|trans } %}
+{% endblock %}

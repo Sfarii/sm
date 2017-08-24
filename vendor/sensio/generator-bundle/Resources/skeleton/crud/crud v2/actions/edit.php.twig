@@ -1,0 +1,90 @@
+
+    /**
+{% block phpdoc_method_header %}
+     * Displays a form to edit an existing {{ entity }} entity.
+{% endblock phpdoc_method_header %}
+     *
+{% block phpdoc_method_annotations %}
+{% if 'annotation' == format %}
+     * @Route("/{id}/edit/{idDetail}",defaults= {"idDetail" = 0 }, name="{{ route_name_prefix }}_edit")
+     * @Method({"GET", "POST"})
+{% endif %}
+{% endblock phpdoc_method_annotations %}
+     */
+{% block method_definition %}
+    public function editAction(Request $request, {{ entity_class }} ${{ entity_singularized }} , $idDetail)
+{% endblock method_definition %}
+    {
+{% block method_body %}
+        $editForm = $this->createForm('{{ namespace }}\Form\{{ entity_class }}Type', ${{ entity_singularized }});
+        $editForm->handleRequest($request);
+
+        if ($idDetail == 0){
+            $detail = new DetailReturnArticle();
+        }else{
+            $detail = $this->getDoctrine()->getManager()->getRepository('ISETSOMagazineBundle:DetailReturnArticle')->find($idDetail);
+        }
+        
+        $supportDocManager = $this->container->get("supportingDocument_manager");
+
+        $editFormDetail = $this->createForm('ISETSO\MagazineBundle\Form\DetailReturnArticleType', $detail);
+        $editFormDetail->handleRequest($request);
+
+        if ($editFormDetail->isSubmitted() && $editFormDetail->isValid()) {
+            if ($idDetail == 0){
+                if ($supportDocManager->newSupportingDocumentSaveInDataBase($detail,${{ entity_singularized }}->getDetail())){
+                     $this->addFlash(
+                        'msg',
+                        $this->get('translator')->trans('Detail.flash.created')
+                    );
+                }else{
+                     $this->addFlash(
+                        'msgError',
+                        $this->get('translator')->trans('Detail.flash.exist')
+                    );
+                }
+            }else{
+                if ($supportDocManager->editSupportingDocumentSaveInDataBase($detail,${{ entity_singularized }}->getDetail())){
+
+                    $this->addFlash(
+                        'msg',
+                        $this->get('translator')->trans('Detail.flash.updated')
+                    );
+            
+                }else{
+                    $this->addFlash(
+                            'msgError',
+                            $this->get('translator')->trans('Detail.flash.notexist')
+                    );  
+                }
+            }
+            return $this->redirectToRoute('{{ route_name_prefix }}_edit', array('id' => ${{ entity_singularized }}->getId()));
+        }
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist(${{ entity_singularized }});
+            $em->flush();
+            $this->addFlash(
+                    'msg',
+                    $this->get('translator')->trans('{{ entity }}.flash.updated')
+            );
+            return $this->redirectToRoute('{{ route_name_prefix }}_index');
+        }
+        $deleteForms = array();
+        foreach (${{ entity_singularized }}->getDetail() as $entity) {
+            $deleteForms[$entity->getId()] = $this->createDeleteFormDetail($entity->getId())->createView();
+        }
+
+{% endblock method_body %}
+
+{% block method_return %}
+        return $this->render('{{ entity|lower|replace({'\\': '/'}) }}/edit.html.twig', array(
+            '{{ entity_singularized }}' => ${{ entity_singularized }},
+            'edit_form' => $editForm->createView(),
+            'formDetail'=> $editFormDetail->createView(),
+            'details'=> ${{ entity_singularized }}->getDetail(),
+            'deleteForms' => $deleteForms
+        ));
+{% endblock method_return %}
+    }

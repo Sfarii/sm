@@ -1,0 +1,75 @@
+{% extends "::base.html.twig" %}
+{% block breadcrumbActive %}{{ 'user.notification.name'|trans }}{% endblock %}
+{% block body %}
+
+	<ul class="timeline">
+		<li class="center-timeline-cat">
+			<div class="inner">
+			{{ 'user.notification.name'|trans }}
+			</div><!-- /.inner -->
+		</li>
+		<!-- BEGIN CENTERING LINE -->
+		<li class="centering-line"></li>
+		<!-- END CENTERING LINE -->
+
+		{% if notifications|length == 0 %}
+			<!-- BEGIN ITEM TIMELINE -->
+				<li class="item-timeline">
+					<div class="buletan"></div>
+					<div class="inner-content">
+						
+						<!-- BEGIN HEADING TIMELINE -->
+						<div class="heading-timeline">
+							<img src="{{ asset('bundles/isetsomagazine/img/User-icon.png') }}" class="avatar" alt="Avatar">
+						</div><!-- /.heading-timeline -->
+						<!-- BEGIN HEADING TIMELINE -->
+						
+						<blockquote>
+							{{ 'family.list.noResultFound'|trans }}
+						</blockquote>
+						
+						
+						
+					</div><!-- /.inner-content -->
+				</li>
+				<!-- END ITEM TIMELINE -->
+    		<td colspan="5">
+    			<i class="ti ti-alert"></i>  
+     		</td>
+		{% else %}
+    		{% for notification in notifications %}
+    			<!-- BEGIN ITEM TIMELINE -->
+					<li class="item-timeline">
+						<div class="buletan"></div>
+						<div class="inner-content">
+							<!-- BEGIN HEADING TIMELINE -->
+							<div class="heading-timeline">
+								<img src="{{ asset('bundles/isetsomagazine/img/User-file-icon.png') }}" class="avatar" alt="Avatar">
+								<div class="user-timeline-info">
+									<p>
+									{{ 'user.notification.by'|trans }} <a href="#">{{notification.author }}</a>
+									<small>{{notification.date|date}}</small></p>
+								</div><!-- /.user-timeline-info -->
+							</div><!-- /.heading-timeline -->
+							<!-- END HEADING TIMELINE -->
+							<h4 class="text text-primary text-capitalize">{{ notification.action|trans }}</h4>
+							<p>{{ notification.message|trans }}</p>
+							
+							
+						</div><!-- /.inner-content -->
+					</li>
+				<!-- END ITEM TIMELINE -->
+				
+			{% endfor %}
+		{% endif %}
+		<li class="item-timeline highlight text-center">
+			<div class="buletan"></div>
+			<div class="inner-content">
+				<h2 class="text-primary"><i class="fa fa-flag-checkered"></i></h2>
+				
+				{{ knp_pagination_render(notifications) }}
+			</div><!-- /.inner-content -->
+		</li>
+	</ul>
+	<br>
+{% endblock %}

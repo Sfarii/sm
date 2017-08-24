@@ -1,0 +1,140 @@
+{% extends 'base.html.twig' %}
+{% block breadcrumb %}
+    <a href="{{ path('articledurable_index') }}">
+       {{ 'articledurable.list.name'|trans }}
+    </a>
+{% endblock %}
+     {% block breadcrumbActive %}{{ 'articledurable.show.name'|trans }}{% endblock %}
+{% block body %}
+<div class="col-sm-6">
+  <div class="tab-content">
+    <div class="tab-pane active" id="tab-about">
+        <div class="panel panel-info" style="visibility: visible; opacity: 1; display: block; transform: translateY(0px);">
+            <div class="panel-heading">
+                <h2>{{ 'articledurable.show.name'|trans }}</h2>
+            </div>
+            <div class="panel-body">
+                <div class="about-area">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                              <tr>
+                                <th class="text text-primary">{{ 'magazine.field.designation'|trans }}</th>
+                                <td>{{ articleDurable.designation }}</td>
+                              </tr>
+                              <tr>
+                                <th class="text text-primary">{{ 'magazine.field.garenti'|trans }}</th>
+                                <td>{{ articleDurable.garenti }}</td>
+                              </tr>
+                              <tr>
+                                <th class="text text-primary">{{ 'magazine.field.unit'|trans }}</th>
+                                <td>{{ articleDurable.unit.designation }}</td>
+                              </tr>
+                              
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+<div class="col-sm-6">
+    <div class="tab-content">
+        <div class="tab-pane active" id="tab-about">
+            <div class="panel panel-info" style="visibility: visible; opacity: 1; display: block; transform: translateY(0px);">
+                <div class="panel-heading">
+                    <h2>{{ 'family.show.name'|trans }}</h2>
+                </div>
+                <div class="panel-body">
+                    <div class="about-area">
+                        <div class="table-responsive">
+                            <table class="table">
+                            <tbody>
+                               <tr>
+                                <th class="text text-primary">{{ 'magazine.field.family'|trans }}</th>
+                                <td>{{ articleDurable.subfamily.family.designation }}</td>
+                              </tr>
+                              <tr>
+                                <th class="text text-primary">{{ 'magazine.field.description'|trans }}</th>
+                                <td>{{ articleDurable.subfamily.family.description }}</td>
+                              </tr>
+                              <tr>
+                                <th class="text text-primary">{{ 'magazine.field.subFamily'|trans }}</th>
+                                <td>{{ articleDurable.subfamily.designation }}</td>
+                              </tr>
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-sm-6">
+    <div class="tab-content">
+        <div class="tab-pane active" id="tab-about">
+            <div class="panel panel-info" style="visibility: visible; opacity: 1; display: block; transform: translateY(0px);">
+                <div class="panel-heading">
+                    <h2>{{ 'local.show.name'|trans }}</h2>
+                </div>
+                <div class="panel-body">
+                    <div class="about-area">
+                        <div class="table-responsive">
+                            <table class="table">
+                            <tbody>
+                               <tr>
+                                <th class="text text-primary">{{ 'magazine.field.typeLocal'|trans }}</th>
+                                <td>{{ articleDurable.local.typeLocal.designation }}</td>
+                              </tr>
+                              <tr>
+                                <th class="text text-primary">{{ 'magazine.field.local'|trans }}</th>
+                                <td>{{ articleDurable.local.designation }}</td>
+                              </tr>
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-sm-6">
+    <div class="tab-content">
+        <div class="tab-pane active" id="tab-about">
+            <div class="panel panel-info" style="visibility: visible; opacity: 1; display: block; transform: translateY(0px);">
+                <div class="panel-heading">
+                    <h2>{{ 'magazine.field.userName'|trans }}</h2>
+                </div>
+                <div class="panel-body">
+                    <div class="about-area">
+                        <div class="table-responsive">
+                            <table class="table">
+                            <tbody>
+                              <tr>
+                                <th class="text text-primary">{{ 'profile.show.username'|trans({}, 'FOSUserBundle') }}</th>
+                                <td>{{ articleDurable.user.username }}</td>
+                              </tr>
+                              <tr>
+                                <th class="text text-primary">{{ 'profile.show.email'|trans({}, 'FOSUserBundle') }}</th>
+                                <td>{{ articleDurable.user.email }}</td>
+                              </tr>
+                              <tr>
+                                <th class="text text-primary">{{ 'magazine.field.role'|trans }}</th>
+                                <td>{% for val in articleDurable.user.roles %}
+                                  {{ val|trans }} <br>
+                                {% endfor %}</td>
+                              </tr>
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

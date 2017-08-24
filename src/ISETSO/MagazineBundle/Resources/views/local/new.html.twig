@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+{% block breadcrumb %}
+    <a href="{{ path('local_index') }}">
+       {{ 'local.list.name'|trans }}
+    </a>
+{% endblock %}
+     {% block breadcrumbActive %}{{ 'local.new.name'|trans }}{% endblock %}
+{% block body %}
+{% include 'Template/SingleFormTemplate.html.twig' with {'form': form ,'form_name' : 'local.new.name'|trans ,'submit_name': 'local.new.submit'|trans } %}
+{% endblock %}

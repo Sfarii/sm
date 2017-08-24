@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block breadcrumb %}
+    <a href="{{ path('articledurable_index') }}">
+       {{ 'articledurable.list.name'|trans }}
+    </a>
+{% endblock %}
+
+{% block breadcrumbActive %}
+    {{ 'articledurable.edit.name'|trans }}
+{% endblock %}
+
+{% block body %}
+    {% include 'Template/SingleFormTemplate.html.twig' with {'form': edit_form ,'form_name' : 'articledurable.edit.name'|trans ,'submit_name': 'articledurable.edit.submit'|trans } %}
+{% endblock %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    {% javascripts filter='?yui_js'
+        'bundles/isetsomagazine/myjs/article_durable.js'
+    %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    
+{% endblock %}

@@ -1,0 +1,232 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="col-md-12">
+    <div class="pull-right">
+        <a class="btn btn-info" href="{{ path('magazine_magazinedischarge_index',{ 'id' : magazine_info.id}) }}">
+            <i class="fa fa-list"></i>  {{ 'dischargearticle.list.name'|trans }}
+        </a> 
+        <a class="btn btn-warning" href="{{ path('returnarticle_subStore_index',{ 'id' : magazine_info.id}) }}">
+            <i class="fa fa-list"></i>  {{ 'returnarticle.list.name'|trans }}
+        </a>
+        <a class="btn btn-success" href="{{ path('magazine_magazinedischarge_new',{ 'id' : magazine_info.id}) }}">
+            <i class="fa fa-plus"></i> {{ 'dischargearticle.new.submit'|trans }}
+        </a> 
+        
+        <hr>  
+    </div>
+</div>   
+<div class="col-md-6">
+    <div class="tab-content">
+        <div class="panel panel-default" style="visibility: visible; opacity: 1; display: block; transform: translateY(0px);">
+            <div class="panel-heading">
+                <h2>{{ 'magazine.field.inCharge'|trans }}</h2>
+            </div>
+            <div class="panel-body no-magazine">
+               
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <th class="text text-primary">{{ 'profile.show.username'|trans({}, 'FOSUserBundle') }}</th>
+                            <th class="text text-primary">{{ 'profile.show.email'|trans({}, 'FOSUserBundle') }}</th>
+                        </thead>
+                        <tbody>
+                            {% for user in magazine_info.inCharge %}
+                                <tr>
+                                    <td>{{ user.username }}</td>
+                                    <td>{{ user.email }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-6">
+    <div class="tab-content">
+        <div class="tab-pane active" id="tab-about">
+            <div class="panel panel-default" style="visibility: visible; opacity: 1; display: block; transform: translateY(0px);">
+                <div class="panel-heading">
+                    <h2>{{ 'magazine.field.userName'|trans }}</h2>
+                </div>
+                <div class="panel-body">
+                    <div class="about-area">
+                        <div class="table-responsive">
+                            <table class="table">
+                            <tbody>
+                              <tr>
+                                <th class="text text-primary">{{ 'profile.show.username'|trans({}, 'FOSUserBundle') }}</th>
+                                <td>{{ magazine_info.user.username }}</td>
+                              </tr>
+                              <tr>
+                                <th class="text text-primary">{{ 'profile.show.email'|trans({}, 'FOSUserBundle') }}</th>
+                                <td>{{ magazine_info.user.email }}</td>
+                              </tr>
+                              
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div data-widget-group="group1">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2><i class="fa fa-list"></i> {{ 'magazin.list.article'|trans }}</h2>
+                        <div class="panel-ctrls">
+                            <div id="example_filter" class="dataTables_filter pull-right">
+                                 {{ form_start(form ,{
+                                    'attr' : { 'class' : 'form-inline' }
+                                    
+                                }) }}
+
+                                    <div class="input-group">
+                                         {{ form_widget(form.search,{
+                                            'attr' : {
+                                                'class' : 'form-control ' ,
+                                                'placeholder' : 'family.list.search'|trans
+                                            } 
+                                            
+                                        }) }}
+                                    </div>
+                                    <div class="input-group">
+                                        <button type="submit" class="btn btn-primary-alt"><i class="ti ti-search"></i></button>
+                                    </div>
+                                 {{ form_end(form) }}
+                            </div>
+                            <i class="separator"></i>
+                            <div class="panel-heading pull-left">
+                                <label class="panel-ctrls-center">
+                                   {{ magazine.getTotalItemCount }}
+                                   {{ 'magazin.list.resultFound'|trans }}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body no-padding">
+                        <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                        <th class="text text-capitalize">
+                                            {{ knp_pagination_sortable(magazine, "#" , 'article_id') }}
+                                            {% if magazine.isSorted('article_id') %}
+                                                
+                                                {% if  magazine.direction == 'asc' %}
+                                                    <span class='ti ti-angle-up pull-right'></span>
+                                                {% else %}
+                                                    <span class='ti ti-angle-down pull-right'></span>
+                                                {% endif %}
+                                            {% else %}
+                                                <i class='ti ti-more pull-right'></i>
+                                            {% endif %}
+                                        </th>
+                                        <th class="text text-capitalize">
+                                            {{ knp_pagination_sortable(magazine, 'magazine.field.designation'|trans , 'article_name') }}
+                                            {% if magazine.isSorted('article_name') %}
+                                                
+                                                {% if  magazine.direction == 'asc' %}
+                                                    <span class='ti ti-angle-up pull-right'></span>
+                                                {% else %}
+                                                    <span class='ti ti-angle-down pull-right'></span>
+                                                {% endif %}
+                                            {% else %}
+                                                <i class='ti ti-more pull-right'></i>
+                                            {% endif %}
+                                        </th>
+                                        <th class="text text-capitalize">
+                                        {{ knp_pagination_sortable(magazine, 'magazine.field.input'|trans , 'qte') }}
+                                        {% if magazine.isSorted('qte') %}
+                                            
+                                            {% if  magazine.direction == 'asc' %}
+                                                <span class='ti ti-angle-up pull-right'></span>
+                                            {% else %}
+                                                <span class='ti ti-angle-down pull-right'></span>
+                                            {% endif %}
+                                        {% else %}
+                                            <i class='ti ti-more pull-right'></i>
+                                        {% endif %}
+                                    </th> 
+                                    <th class="text text-capitalize">
+                                        {{ knp_pagination_sortable(magazine, 'magazine.field.discharge'|trans , 'discharge') }}
+                                        {% if magazine.isSorted('discharge') %}
+                                            
+                                            {% if  magazine.direction == 'asc' %}
+                                                <span class='ti ti-angle-up pull-right'></span>
+                                            {% else %}
+                                                <span class='ti ti-angle-down pull-right'></span>
+                                            {% endif %}
+                                        {% else %}
+                                            <i class='ti ti-more pull-right'></i>
+                                        {% endif %}
+                                    </th> 
+                                    <th class="text text-capitalize">
+                                        {{ knp_pagination_sortable(magazine, 'magazine.field.return'|trans , 'returned') }}
+                                        {% if magazine.isSorted('returned') %}
+                                            
+                                            {% if  magazine.direction == 'asc' %}
+                                                <span class='ti ti-angle-up pull-right'></span>
+                                            {% else %}
+                                                <span class='ti ti-angle-down pull-right'></span>
+                                            {% endif %}
+                                        {% else %}
+                                            <i class='ti ti-more pull-right'></i>
+                                        {% endif %}
+                                    </th> 
+                                        <th class="text text-capitalize">
+                                            {{ knp_pagination_sortable(magazine, 'magazine.field.unit'|trans , 'unit') }}
+                                            {% if magazine.isSorted('unit') %}
+                                                
+                                                {% if  magazine.direction == 'asc' %}
+                                                    <span class='ti ti-angle-up pull-right'></span>
+                                                {% else %}
+                                                    <span class='ti ti-angle-down pull-right'></span>
+                                                {% endif %}
+                                            {% else %}
+                                                <i class='ti ti-more pull-right'></i>
+                                            {% endif %}
+                                        </th>
+                                        
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    {% if magazine|length == 0 %} 
+                                        <td  class="text text-capitalize text-danger text-center" colspan="4">
+                                            <p  style="margin-top: 1%;">
+                                            <i class="fa fa-exclamation-triangle"></i> <b>{{ 'magazine.list.noResultFound'|trans }}</b>
+                                            </p>
+                                        </td>
+                                    {% else %}
+                                        {% for magazine in magazine %}
+                                            <tr>
+                                                <td>{{ magazine.id_article }}</td>
+                                                <td>{{ magazine.article_name }}</td>
+                                                <td>{{ magazine.qte }}</td>
+                                                <td>{{ magazine.discharge }}</td>
+                                                <td>{{ magazine.returned }}</td>
+                                                <td>{{ magazine.unit }}</td>
+                                                
+                                            </tr>
+                                        {% endfor %}
+                                    {% endif %}
+                             </tbody>
+                        </table>
+                    </div>
+                    <div class="panel-footer">
+                        {{ knp_pagination_render(magazine) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

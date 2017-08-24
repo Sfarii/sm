@@ -1,0 +1,18 @@
+<div class="panel panel-profile" style="visibility: visible; opacity: 1; display: block; transform: translateY(0px);">
+  <div class="panel-body">
+    <img src="{{ asset('bundles/isetsomagazine/img/User-icon.png') }}" class="img-circle">
+    <div class="name">{{ app.user.username }}</div>
+  </div>
+</div>
+<div class="list-group list-group-alternate mb-n nav nav-tabs">
+	<li class="dropdown pull-right tabdrop hide">
+		<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+			<i class="fa fa-angle-down"></i> </a><ul class="dropdown-menu"></ul>
+	</li>
+	<a href="{{ path('fos_user_profile_edit') }}" class="list-group-item">
+		<i class="ti ti-pencil"></i> {% trans %}menu.user.setting{% endtrans %}
+	</a>
+	<a href="{{ path('fos_user_change_password') }}" class="list-group-item">
+		<i class="ti ti-lock"></i> {% trans %}menu.user.password{% endtrans %}
+	</a>
+</div>

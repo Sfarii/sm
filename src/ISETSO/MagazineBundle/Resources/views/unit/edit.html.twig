@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+{% block breadcrumb %}
+    <a href="{{ path('unit_index') }}">
+       {{ 'unit.list.name'|trans }}
+    </a>
+{% endblock %}
+	 {% block breadcrumbActive %}{{ 'unit.edit.name'|trans }}{% endblock %}
+{% block body %}
+    {% include 'Template/SingleFormTemplate.html.twig' with {'form': edit_form ,'form_name' : 'unit.edit.name'|trans ,'submit_name': 'unit.edit.submit'|trans } %}
+{% endblock %}

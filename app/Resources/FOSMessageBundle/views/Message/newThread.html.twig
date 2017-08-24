@@ -1,0 +1,60 @@
+{% extends 'FOSMessageBundle::layout.html.twig' %}
+
+{% block fos_message_content %}
+<div class="panel panel-primary" style="visibility: visible; opacity: 1; display: block; transform: translateY(0px);">
+	<div class="panel-heading">
+    	<div class="pull-left">
+    		<h2><i class="fa fa-plus-square-o"></i> {% trans from 'FOSMessageBundle' %}send_new{% endtrans %}</h2>
+    	</div>
+    </div>
+    	
+    	<form novalidate="novalidate" action="{{ url('fos_message_thread_new') }}" class="form-horizontal row-border" method="post">
+
+	    	<div class="panel-body">
+	        
+	        	<div class="col-md-12">
+			    <div class="form-group" style="margin-top: 5%;">
+					<div class="col-md-6">
+						<div class="input-group input-group-lg">
+							<span class="input-group-addon"><i class="fa fa-child"></i></span>
+								{{ form_widget(form.recipient, { 'attr': {'class': 'form-control input-lg' , 'placeholder' : 'recipients'} }) }}
+						</div>
+						{{ form_errors(form.recipient) }}
+					</div>
+					<div class="col-md-6">
+						<div class="input-group input-group-lg">
+							<span class="input-group-addon"><i class="fa fa-envelope-o"></i></span>
+								{{ form_widget(form.subject, { 'attr': {'class': 'form-control input-lg', 'placeholder' : 'subject' } }) }}
+						</div>
+						{{ form_errors(form.subject) }}
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<div class="col-md-12">
+						<div class="input-group input-group-lg">
+							<span class="input-group-addon"><i class="fa fa-envelope-o"></i></span>
+							
+								{{ form_widget(form.body, { 'attr': {'class': 'form-control', 'rows':"4", 'placeholder' : 'body' , 'style':"margin: 0px; height: 85px;"  } }) }}
+							</div>
+						
+						{{ form_errors(form.body) }}
+					</div>
+				</div>
+				{{ form_widget(form) }}
+				
+				</div> 
+			</div> 
+			<div class="panel-footer">
+					<div class="pull-right">
+						<button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane-o" aria-hidden="true"></i> {% trans from 'FOSMessageBundle' %}sent{% endtrans %} 
+						</button>
+				</div>
+			</div>
+		</form>
+		
+        </div>
+    </div>
+    
+
+{% endblock %}

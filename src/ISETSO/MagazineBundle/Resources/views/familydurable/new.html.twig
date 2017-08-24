@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+{% block breadcrumb %}
+    <a href="{{ path('familydurable_index')}}">{{ 'family.list.name'|trans }}</a>
+{% endblock %}
+{% block breadcrumbActive %}
+    {{ 'family.new.name'|trans }}
+{% endblock %}
+{% block body %}
+    {% include 'Template/SingleFormTemplate.html.twig' with {'form': form ,'form_name' : 'family.new.name'|trans ,'submit_name': 'family.new.submit'|trans } %}
+{% endblock %}

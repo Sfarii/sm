@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+{% block breadcrumb %}
+    <a href="{{ path('activitydomain_index') }}">
+       {{ 'activitydomain.list.name'|trans }}
+    </a>
+{% endblock %}
+{% block breadcrumbActive %}
+    {{ 'activitydomain.edit.name'|trans }}
+{% endblock %}
+{% block body %}
+    {% include 'Template/SingleFormTemplate.html.twig' with {'form': edit_form ,'form_name' : 'activitydomain.edit.name'|trans ,'submit_name': 'activitydomain.edit.submit'|trans } %}
+{% endblock %}

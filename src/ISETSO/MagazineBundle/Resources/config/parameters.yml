@@ -1,0 +1,15 @@
+# cette fichier a nom ficher utilisé pour faire le pdf
+parameters:
+    journal_pdf: ISETSOMagazineBundle:PDF:pdf.html.twig
+    journal_detail_pdf: ISETSOMagazineBundle:PDF:journal_detail_pdf.html.twig
+
+    stock_pdf: ISETSOMagazineBundle:PDF:stock_pdf.html.twig
+    inventory_pdf: ISETSOMagazineBundle:PDF:inventory_pdf.html.twig
+
+    order_pdf: ISETSOMagazineBundle:PDF:order_pdf.html.twig
+    discharge_pdf: ISETSOMagazineBundle:PDF:discharge_pdf.html.twig
+    return_pdf: ISETSOMagazineBundle:PDF:return_pdf.html.twig
+
+    order_detail_pdf: ISETSOMagazineBundle:PDF:order_detail_pdf.html.twig
+    discharge_detail_pdf: ISETSOMagazineBundle:PDF:discharge_detail_pdf.html.twig
+    return_detail_pdf: ISETSOMagazineBundle:PDF:return_detail_pdf.html.twig

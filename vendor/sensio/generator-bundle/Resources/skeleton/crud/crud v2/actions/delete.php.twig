@@ -1,0 +1,102 @@
+
+    /**
+{% block phpdoc_method_header %}
+     * Deletes a {{ entity }} entity.
+{% endblock phpdoc_method_header %}
+     *
+{% block phpdoc_method_annotations %}
+{% if 'annotation' == format %}
+     * @Route("/{id}", name="{{ route_name_prefix }}_delete")
+     * @Method("DELETE")
+{% endif %}
+{% endblock phpdoc_method_annotations %}
+     */
+{% block method_definition %}
+    public function deleteAction(Request $request, {{ entity_class }} ${{ entity_singularized }})
+{% endblock method_definition %}
+    {
+{% block method_body %}
+        $form = $this->createDeleteForm(${{ entity_singularized }});
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove(${{ entity_singularized }});
+            $em->flush();
+            $this->addFlash(
+                    'msg',
+                    $this->get('translator')->trans('{{ entity }}.flash.deleted')
+            );
+        }
+{% endblock method_body %}
+
+{% block method_return %}
+        return $this->redirectToRoute('{{ route_name_prefix }}_index');
+{% endblock method_return %}
+    }
+
+{% block form %}
+    /**
+     * Creates a form to delete a {{ entity }} entity.
+     *
+     * @param {{ entity_class }} ${{ entity_singularized }} The {{ entity }} entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createDeleteForm({{ entity_class }} ${{ entity_singularized }})
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('{{ route_name_prefix }}_delete', array('id' => ${{ entity_singularized }}->getId())))
+            ->setMethod('DELETE')
+            ->getForm()
+        ;
+    }
+
+    /**
+     * Deletes a Detail entity.
+     * @Route("/detail/{idArticle}/{idDetail}",defaults= {"idDetail" = 0 , "idArticle" = 0}, name="{{ route_name_prefix }}detail_delete")
+     * @Method("DELETE")
+     */
+    public function deleteDetailAction(Request $request, $idArticle , $idDetail)
+    {
+        $form = $this->createDeleteFormDetail($idArticle,$idDetail);
+        $form->handleRequest($request);
+
+        $supportDocManager = $this->container->get("supportingDocument_manager");
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            if ($idDetail == 0){
+                $supportDocManager->deleteSupportingDocumentSaveInSession($idArticle,$this->getRequest()->getSession()->get('detailReturn'));
+                $this->addFlash(
+                    'msg',
+                    $this->get('translator')->trans('supportingdocument.flash.deleted')
+                );
+                return $this->redirectToRoute('{{ route_name_prefix }}_new');
+            }else{
+                $supportDocManager->deleteSupportingDocumentSaveInDataBase($idDetail , 'ISETSOMagazineBundle:DetailReturnartIcle');
+                $this->addFlash(
+                    'msg',
+                    $this->get('translator')->trans('supportingdocument.flash.deleted')
+                );
+                return $this->redirectToRoute('{{ route_name_prefix }}_edit', array('id' => $idArticle));
+            }
+        }
+    }
+
+    /**
+     * Creates a form to delete a SupportingDocument entity.
+     *
+     * @param int $id The SupportingDocument entity
+     * @param int $idDetail The SupportingDocument entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createDeleteFormDetail($idArticle, $idDetail = 0)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('{{ route_name_prefix }}detail_delete', array('idArticle' => $idArticle , 'idDetail'=> $idDetail)))
+            ->setMethod('DELETE')
+            ->getForm()
+        ;
+    }
+{% endblock form %}

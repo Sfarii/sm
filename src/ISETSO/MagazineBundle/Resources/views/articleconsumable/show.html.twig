@@ -1,0 +1,115 @@
+{% extends 'base.html.twig' %}
+{% block breadcrumb %}
+    <a href="{{ path('articleconsumable_index') }}">
+       {{ 'articleconsumable.list.name'|trans }}
+    </a>
+{% endblock %}
+     {% block breadcrumbActive %}{{ 'articleconsumable.show.name'|trans }}{% endblock %}
+{% block body %}
+<div class="col-sm-6">
+  <div class="tab-content">
+    <div class="tab-pane active" id="tab-about">
+        <div class="panel panel-info" style="visibility: visible; opacity: 1; display: block; transform: translateY(0px);">
+            <div class="panel-heading">
+                <h2>{{ 'articleconsumable.show.name'|trans }}</h2>
+            </div>
+            <div class="panel-body">
+                <div class="about-area">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                              <tr>
+                                <th class="text text-primary">{{ 'magazine.field.designation'|trans }}</th>
+                                <td>{{ articleConsumable.designation }}</td>
+                              </tr>
+                              <tr>
+                                <th class="text text-primary">{{ 'magazine.field.minThreshold'|trans }}</th>
+                                <td>{{ articleConsumable.minThreshold }}</td>
+                              </tr>
+                              <tr>
+                                <th class="text text-primary">{{ 'magazine.field.maxThreshold'|trans }}</th>
+                                <td>{{ articleConsumable.maxThreshold }}</td>
+                              </tr>
+                              <tr>
+                                <th class="text text-primary">{{ 'magazine.field.unit'|trans }}</th>
+                                <td>{{ articleConsumable.unit.designation }}</td>
+                              </tr>
+                              
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+<div class="col-sm-6">
+    <div class="tab-content">
+        <div class="tab-pane active" id="tab-about">
+            <div class="panel panel-info" style="visibility: visible; opacity: 1; display: block; transform: translateY(0px);">
+                <div class="panel-heading">
+                    <h2>{{ 'family.show.name'|trans }}</h2>
+                </div>
+                <div class="panel-body">
+                    <div class="about-area">
+                        <div class="table-responsive">
+                            <table class="table">
+                            <tbody>
+                              <tr>
+                                <th class="text text-primary">{{ 'magazine.field.family'|trans }}</th>
+                                <td>{{ articleConsumable.subfamily.family.designation }}</td>
+                              </tr>
+                              <tr>
+                                <th class="text text-primary">{{ 'magazine.field.description'|trans }}</th>
+                                <td>{{ articleConsumable.subfamily.family.description }}</td>
+                              </tr>
+                              <tr>
+                                <th class="text text-primary">{{ 'magazine.field.subFamily'|trans }}</th>
+                                <td>{{ articleConsumable.subfamily.designation }}</td>
+                              </tr>
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-sm-6 col-sm-offset-3">
+    <div class="tab-content">
+        <div class="tab-pane active" id="tab-about">
+            <div class="panel panel-info" style="visibility: visible; opacity: 1; display: block; transform: translateY(0px);">
+                <div class="panel-heading">
+                    <h2>{{ 'magazine.field.userName'|trans }}</h2>
+                </div>
+                <div class="panel-body">
+                    <div class="about-area">
+                        <div class="table-responsive">
+                            <table class="table">
+                            <tbody>
+                              <tr>
+                                <th class="text text-primary">{{ 'profile.show.username'|trans({}, 'FOSUserBundle') }}</th>
+                                <td>{{ articleConsumable.user.username }}</td>
+                              </tr>
+                              <tr>
+                                <th class="text text-primary">{{ 'profile.show.email'|trans({}, 'FOSUserBundle') }}</th>
+                                <td>{{ articleConsumable.user.email }}</td>
+                              </tr>
+                              <tr>
+                                <th class="text text-primary">{{ 'magazine.field.role'|trans }}</th>
+                                <td>{% for val in articleConsumable.user.roles %}
+                                      {{ val|trans }} <br>
+                                    {% endfor %}</td>
+                              </tr>
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,69 @@
+# To get started with security, check out the documentation:
+# http://symfony.com/doc/current/book/security.html
+security:
+    encoders:
+        FOS\UserBundle\Model\UserInterface: sha512
+    role_hierarchy:
+        ROLE_GESTION_UNIT: ROLE_GESTION_UNIT
+        ROLE_GESTION_ARTICLE: ROLE_GESTION_ARTICLE
+        ROLE_GESTION_LOCAL: ROLE_GESTION_LOCAL
+        ROLE_GESTION_TYPE_LOCAL: ROLE_GESTION_TYPE_LOCAL
+        ROLE_GESTION_ORIGIN: ROLE_GESTION_ORIGIN
+        ROLE_GESTION_PROVIDER: ROLE_GESTION_PROVIDER
+        ROLE_GESTION_ACTIVITY_DOMAIN: ROLE_GESTION_ACTIVITY_DOMAIN
+        ROLE_GESTION_FAMILY: ROLE_GESTION_FAMILY
+        ROLE_GESTION_SUBFAMILY: ROLE_GESTION_SUBFAMILY
+        ROLE_GESTION_JOURNAL: ROLE_GESTION_JOURNAL
+        ROLE_GESTION_DISCHARGE_TO_USER: ROLE_GESTION_DISCHARGE_TO_USER
+        ROLE_GESTION_DISCHARGE_TO_MAGAZINE: ROLE_GESTION_DISCHARGE_TO_MAGAZINE
+        ROLE_GESTION_DISCHARGE_TO_LOCAL: ROLE_GESTION_DISCHARGE_TO_LOCAL
+        ROLE_GESTION_ORDER: ROLE_GESTION_ORDER
+        ROLE_GESTION_RETURN_TO_SUB_STORE: ROLE_GESTION_RETURN_TO_SUB_STORE
+        ROLE_GESTION_RETURN_TO_CENTRAL_STORE: ROLE_GESTION_RETURN_TO_CENTRAL_STORE
+        ROLE_GESTION_USER: ROLE_GESTION_USER
+        ROLE_GESTION_MAGAZINE: ROLE_GESTION_MAGAZINE
+        ROLE_GESTION_GROUP: ROLE_GESTION_GROUP
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username
+    firewalls:
+        main:
+            pattern: ^/
+            form_login:
+                csrf_token_generator: security.csrf.token_manager
+                csrf_parameter: _csrf_token
+                csrf_token_id: authenticate
+                csrf_token_generator: my.csrf_token_generator.id
+                # if you are using Symfony < 2.8, use the following config instead:
+                # csrf_provider: form.csrf_provider
+                default_target_path: /home
+            logout:
+                target: /login
+            anonymous:    true
+
+    access_control:
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY  }
+        - { path: ^/activitydomain, role: ROLE_GESTION_ACTIVITY_DOMAIN , allow_if: "has_role('ROLE_SUPER_ADMIN')" }
+        - { path: ^/articleconsumable, role: ROLE_GESTION_ARTICLE , allow_if: "has_role('ROLE_SUPER_ADMIN')"}
+        - { path: ^/articledurable, role: ROLE_GESTION_ARTICLE , allow_if: "has_role('ROLE_SUPER_ADMIN')"}
+        - { path: ^/family, role: ROLE_GESTION_FAMILY , allow_if: "has_role('ROLE_SUPER_ADMIN')"}
+        - { path: ^/subfamily, role: ROLE_GESTION_SUBFAMILY , allow_if: "has_role('ROLE_SUPER_ADMIN')"}
+        - { path: ^/local, role: ROLE_GESTION_LOCAL , allow_if: "has_role('ROLE_SUPER_ADMIN')"}
+        - { path: ^/typelocal, role: ROLE_GESTION_TYPE_LOCAL , allow_if: "has_role('ROLE_SUPER_ADMIN')"}
+        - { path: ^/provider, role: ROLE_GESTION_PROVIDER , allow_if: "has_role('ROLE_SUPER_ADMIN')"}
+        - { path: ^/returnarticle_centralStore, role: ROLE_GESTION_RETURN_TO_CENTRAL_STORE , allow_if: "has_role('ROLE_SUPER_ADMIN')"}
+        - { path: ^/returnarticle_subStore, role: ROLE_GESTION_RETURN_TO_SUB_STORE , allow_if: "has_role('ROLE_SUPER_ADMIN')"}
+        - { path: ^/orderarticle, role: ROLE_GESTION_ORDER , allow_if: "has_role('ROLE_SUPER_ADMIN')"}
+        - { path: ^/dischargearticle_user, role: ROLE_GESTION_DISCHARGE_TO_USER , allow_if: "has_role('ROLE_SUPER_ADMIN')"}
+        - { path: ^/dischargearticle_magazine, role: ROLE_GESTION_DISCHARGE_TO_MAGAZINE , allow_if: "has_role('ROLE_SUPER_ADMIN')"}
+        - { path: ^/unit, role: ROLE_GESTION_UNIT , allow_if: "has_role('ROLE_SUPER_ADMIN')"}
+        - { path: ^/user, role: ROLE_GESTION_USER , allow_if: "has_role('ROLE_SUPER_ADMIN')"}
+        - { path: ^/usergroup, role: ROLE_GESTION_GROUP , allow_if: "has_role('ROLE_SUPER_ADMIN')"}
+        - { path: ^/register, role: ROLE_GESTION_USER , allow_if: "has_role('ROLE_SUPER_ADMIN')"}
+        - { path: ^/origin, role: ROLE_GESTION_ORIGIN , allow_if: "has_role('ROLE_SUPER_ADMIN')"}
+        - { path: ^/journalconsumable, role: ROLE_GESTION_JOURNAL , allow_if: "has_role('ROLE_SUPER_ADMIN')"}
+        - { path: ^/journaldurable, role: ROLE_GESTION_JOURNAL , allow_if: "has_role('ROLE_SUPER_ADMIN')"}
+        - { path: ^/magazine, role: ROLE_GESTION_MAGAZINE , allow_if: "has_role('ROLE_SUPER_ADMIN')"}
+        - { path: ^/profile, role: ROLE_USER , allow_if: "has_role('ROLE_SUPER_ADMIN')"}
+        - { path: ^/message, role: ROLE_USER , allow_if: "has_role('ROLE_SUPER_ADMIN')"}
+        - { path: ^/discharge_article_to_local_index, role: ROLE_GESTION_DISCHARGE_TO_LOCAL , allow_if: "has_role('ROLE_SUPER_ADMIN')"}

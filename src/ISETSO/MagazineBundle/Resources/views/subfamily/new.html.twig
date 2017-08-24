@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block breadcrumb %}
+    <a href="{{ path('subfamily_index',{ 'id' : family.id }) }}">
+       {{ 'subfamily.list.name'|trans }}
+    </a>
+{% endblock %}
+
+{% block breadcrumbActive %}
+    {{ 'subfamily.new.name'|trans }}
+{% endblock %}
+
+{% block body %}
+    {% include 'Template/SingleFormTemplate.html.twig' with {'form': form ,'form_name' : 'subfamily.new.name'|trans ,'submit_name': 'subfamily.new.submit'|trans } %}
+{% endblock %}

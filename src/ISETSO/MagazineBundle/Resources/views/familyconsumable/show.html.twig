@@ -1,0 +1,163 @@
+{% extends 'base.html.twig' %}
+{% block breadcrumb %}
+    <a href="{{ path('familyconsumable_index')}}">{{ 'family.list.name'|trans }}</a>
+{% endblock %}
+{% block breadcrumbActive %}
+    {{ 'family.show.name'|trans }}
+{% endblock %}
+{% block body %}
+    <div class="pull-right">
+        <a class="btn btn-success" href="{{ path('subfamily_new',{ 'id' : family.id }) }}">
+            <i class="fa fa-plus"></i> {{ 'subfamily.new.submit'|trans }}
+        </a>
+    </div>
+    </br></br>
+<div data-widget-group="group1">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2><i class="fa fa-list"></i> {{ 'family.show.name'|trans }}</h2>
+                    <div class="panel-ctrls">
+                        <div id="example_filter" class="dataTables_filter pull-right">
+                            
+                            {{ form_start(form ,{
+                                'attr' : { 'class' : 'form-inline' } 
+                                
+                            }) }}
+
+                                <div class="input-group">
+                                    {{ form_widget(form.search,{
+                                        'attr' : {
+                                            'class' : 'form-control ' ,
+                                            'placeholder' : 'family.list.search'|trans
+                                        } 
+                                        
+                                    }) }}
+                                </div>
+                                <div class="input-group">
+                                    <button type="submit" class="btn btn-primary-alt"><i class="ti ti-search"></i></button>
+                                </div>
+                                {{ form_widget(form) }}
+                            {{ form_end(form) }}
+                        </div>
+                        <i class="separator"></i>
+                        <div class="panel-heading pull-left">
+                            <label class="panel-ctrls-center">
+                               {{ families.getTotalItemCount }} 
+                               {{ 'family.list.resultFound'|trans }}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body no-padding">
+                    <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th class="text text-capitalize">
+                                    {{ knp_pagination_sortable(families, 'magazine.field.id'|trans , 'f.id') }}
+                                    {% if families.isSorted('f.id') %}
+                                        
+                                        {% if  families.direction == 'asc' %}
+                                            <span class="ti ti-angle-up pull-right"></span>
+                                        {% else %}
+                                            <span class="ti ti-angle-down pull-right"></span>
+                                        {% endif %}
+                                    {% else %}
+                                        <i class='ti ti-more pull-right'></i>
+                                    {% endif %}
+                                </th>
+                                <th class="text text-capitalize">
+                                    {{ knp_pagination_sortable(families, 'magazine.field.designation'|trans , 'f.designation') }}
+                                    {% if families.isSorted('f.designation') %}
+                                        
+                                        {% if  families.direction == 'asc' %}
+                                            <span class="ti ti-angle-up pull-right"></span>
+                                        {% else %}
+                                            <span class="ti ti-angle-down pull-right"></span>
+                                        {% endif %}
+                                    {% else %}
+                                        <i class='ti ti-more pull-right'></i>
+                                    {% endif %}
+                                </th>
+                                <th class="text text-capitalize">
+                                    {{ knp_pagination_sortable(families, 'magazine.field.userName'|trans, 'u.username') }}
+                                    {% if families.isSorted('u.username') %}
+                                        
+                                        {% if  families.direction == 'asc' %}
+                                            <span class="ti ti-angle-up pull-right"></span>
+                                        {% else %}
+                                            <span class="ti ti-angle-down pull-right"></span>
+                                        {% endif %}
+                                    {% else %}
+                                        <i class='ti ti-more pull-right'></i>
+                                    {% endif %}
+                                </th>
+                                <th class="text text-capitalize text-primary"> {{ 'magazine.action'|trans }} </th>
+                            </tr>
+                        </thead> 
+                        <tbody>
+                            {% if families|length == 0 %}
+                                <td  class="text text-capitalize text-danger text-center animated fadeInDown" colspan="4">
+                                    <i class="fa fa-exclamation-triangle"></i>
+                                        <b>{{ 'family.list.noResultFound'|trans }}</b>
+                                    
+                                 </td>
+                                
+                            {% else %}
+                                {% for subfamily in families %}
+                                    <tr>
+                                        <td>{{ subfamily.id }}</td>
+                                        <td class="text text-capitalize">{{ subfamily.designation }}</td>
+                                        <td>
+                                            {{ subfamily.user.username }}
+                                        </td>
+                                        <td>
+                                            
+                                            <div class="btn-group">
+                                                <a href="{{ path('subfamily_edit', { 'id': subfamily.id, 'idFamily' : subfamily.family.id}) }}" class="btn btn-info-alt"><i class="ti ti-pencil-alt"></i></a>
+                                                <a {{ subfamily.articles|length != 0 ? 'disabled=""' : "" }} href="#" data-box="#{{ subfamily.id }}" class="btn btn-danger-alt mb-control"><i class="ti ti-trash"></i></a>
+                                            </div>
+                                        </td>
+                                         <!-- MESSAGE BOX-->
+                                            <div class="message-box animated fadeIn" data-sound="alert" id="{{ subfamily.id }}">
+                                                <div class="mb-container">
+                                                    <div class="mb-middle">
+                                                        <div class="mb-title"><span class="ti ti-trash"></span> {{ 'subfamily.delete.name'|trans }} ?</div>
+                                                        <div class="mb-content">
+                                                            <p>{{ 'subfamily.delete.message'|trans }}</p>                    
+                                                            
+                                                        </div>
+                                                        <div class="mb-footer">
+                                                            <div class="pull-right">
+                                                                <form action="{{ path('subfamily_delete', { 'id': subfamily.id }) }}" method="post">
+                                                                    <input type="hidden" name="_method" value="DELETE" />
+                                                                    {{ form_widget(deleteForms[ subfamily.id ]) }} 
+                                                                    <button type="submit" class="btn btn-danger btn-lg">
+                                                                        <i class="icon-trash"></i>
+                                                                         {{ 'messageBox.yes'|trans }}
+                                                                    </button>
+                                                                </form>
+                                                                <button class="btn btn-default btn-lg mb-control-close">
+                                                                    {{ 'messageBox.no'|trans }}</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <!-- END MESSAGE BOX-->
+                                    </tr>
+                                {% endfor %}
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="panel-footer">
+                    {{ knp_pagination_render(families) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+{% endblock %} 

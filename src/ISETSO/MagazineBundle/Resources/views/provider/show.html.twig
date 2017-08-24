@@ -1,0 +1,116 @@
+{% extends 'base.html.twig' %}
+{% block breadcrumb %}
+    <a href="{{ path('provider_index') }}">
+       {{ 'provider.list.name'|trans }}
+    </a>
+{% endblock %}
+     {% block breadcrumbActive %}{{ 'provider.show.name'|trans }}{% endblock %}
+{% block body %}
+<div class="col-sm-6">
+  <div class="tab-content">
+    <div class="tab-pane active" id="tab-about">
+        <div class="panel panel-primary" style="visibility: visible; opacity: 1; display: block; transform: translateY(0px);">
+            <div class="panel-heading">
+                <h2>{{ 'provider.show.name'|trans }}</h2>
+            </div>
+            <div class="panel-body">
+                <div class="about-area">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                              <tr>
+                                <th class="text text-primary">{{ 'magazine.field.socialReason'|trans }}</th>
+                                <td>{{ provider.socialReason }}</td>
+                              </tr>
+                              <tr>
+                                <th class="text text-primary">{{ 'magazine.field.phone'|trans }}</th>
+                                <td>{{ provider.phone }}</td>
+                              </tr>
+                              <tr>
+                                <th class="text text-primary">{{ 'magazine.field.address'|trans }}</th>
+                                <td>{{ provider.address }}</td>
+                              </tr>
+                              <tr>
+                                <th class="text text-primary">{{ 'magazine.field.fax'|trans }}</th>
+                                <td>{{ provider.fax }}</td>
+                              </tr>
+                              <tr>
+                                <th class="text text-primary">{{ 'magazine.field.email'|trans }}</th>
+                                <td>{{ provider.email }}</td>
+                              </tr>
+                              <tr>
+                                <th class="text text-primary">{{ 'magazine.field.contact'|trans }}</th>
+                                <td>{{ provider.contact }}</td>
+                              </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+<div class="col-sm-6">
+    <div class="tab-content">
+        <div class="tab-pane active" id="tab-about">
+            <div class="panel panel-primary" style="visibility: visible; opacity: 1; display: block; transform: translateY(0px);">
+                <div class="panel-heading">
+                    <h2>{{ 'family.show.name'|trans }}</h2>
+                </div>
+                <div class="panel-body">
+                    <div class="about-area">
+                        <div class="table-responsive">
+                            <table class="table">
+                            <tbody>
+                              <tr>
+                                <th class="text text-primary">{{ 'magazine.field.id'|trans }}</th>
+                                <td>{{ provider.activityDomain.id }}</td>
+                              </tr>
+                              <tr>
+                                <th class="text text-primary">{{ 'magazine.field.activityDomain'|trans }}</th>
+                                <td>{{ provider.activityDomain.designation }}</td>
+                              </tr>
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-sm-6 col-sm-offset-3">
+    <div class="tab-content">
+        <div class="tab-pane active" id="tab-about">
+            <div class="panel panel-primary" style="visibility: visible; opacity: 1; display: block; transform: translateY(0px);">
+                <div class="panel-heading">
+                    <h2>{{ 'magazine.field.userName'|trans }}</h2>
+                </div>
+                <div class="panel-body">
+                    <div class="about-area">
+                        <div class="table-responsive">
+                            <table class="table">
+                            <tbody>
+                              <tr>
+                                <th class="text text-primary">{{ 'profile.show.username'|trans({}, 'FOSUserBundle') }}</th>
+                                <td>{{ provider.user.username }}</td>
+                              </tr>
+                              <tr>
+                                <th class="text text-primary">{{ 'profile.show.email'|trans({}, 'FOSUserBundle') }}</th>
+                                <td>{{ provider.user.email }}</td>
+                              </tr>
+                              <tr>
+                                <th class="text text-primary">{{ 'magazine.field.role'|trans }}</th>
+                                <td>{% for val in provider.user.roles %}{{ val }}{% endfor %}</td>
+                              </tr>
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

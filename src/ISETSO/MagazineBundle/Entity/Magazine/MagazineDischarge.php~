@@ -1,0 +1,248 @@
+<?php
+
+namespace ISETSO\MagazineBundle\Entity\Magazine;
+
+use ISETSO\MagazineBundle\Entity\ArticleManagement\ArticleManagement;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * MagazineDischarge
+ *
+ * @ORM\Table(name="magazine_discharge")
+ * @ORM\Entity(repositoryClass="ISETSO\MagazineBundle\Repository\Magazine\MagazineDischargeRepository")
+ */
+class MagazineDischarge extends ArticleManagement
+{
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="etat", type="string", nullable=true, length=50)
+     * 
+     */
+    protected $etat;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="DetailMagazine")
+     * @ORM\JoinColumn(name="detailDischargeArticle_id", referencedColumnName="id")
+     * @Assert\NotBlank()
+     */
+    protected $detail;
+    /**
+     * @ORM\ManyToOne(targetEntity="ISETSO\MagazineBundle\Entity\magazine\Magazine" , inversedBy="dischargeMagazine")
+     * @ORM\JoinColumn(name="magazine_id", referencedColumnName="id")
+     */
+    private $fromMagazine;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="ISETSO\UserBundle\Entity\User\User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $toUser;
+
+    /**
+     * Set fromMagazine
+     *
+     * @param \ISETSO\MagazineBundle\Entity\magazine\Magazine $fromMagazine
+     *
+     * @return MagazineDischarge
+     */
+    public function setFromMagazine(\ISETSO\MagazineBundle\Entity\magazine\Magazine $fromMagazine = null)
+    {
+        $this->fromMagazine = $fromMagazine;
+
+        return $this;
+    }
+
+    /**
+     * Get fromMagazine
+     *
+     * @return \ISETSO\MagazineBundle\Entity\magazine\Magazine
+     */
+    public function getFromMagazine()
+    {
+        return $this->fromMagazine;
+    }
+
+    /**
+     * Set toUser
+     *
+     * @param \ISETSO\UserBundle\Entity\User\User $toUser
+     *
+     * @return MagazineDischarge
+     */
+    public function setToUser(\ISETSO\UserBundle\Entity\User\User $toUser = null)
+    {
+        $this->toUser = $toUser;
+
+        return $this;
+    }
+
+    /**
+     * Get toUser
+     *
+     * @return \ISETSO\UserBundle\Entity\User\User
+     */
+    public function getToUser()
+    {
+        return $this->toUser;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->detail = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set etat
+     *
+     * @param string $etat
+     *
+     * @return MagazineDischarge
+     */
+    public function setEtat($etat)
+    {
+        $this->etat = $etat;
+
+        return $this;
+    }
+
+    /**
+     * Get etat
+     *
+     * @return string
+     */
+    public function getEtat()
+    {
+        return $this->etat;
+    }
+
+    /**
+     * Set observation
+     *
+     * @param string $observation
+     *
+     * @return MagazineDischarge
+     */
+    public function setObservation($observation)
+    {
+        $this->observation = $observation;
+
+        return $this;
+    }
+
+    /**
+     * Get observation
+     *
+     * @return string
+     */
+    public function getObservation()
+    {
+        return $this->observation;
+    }
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     *
+     * @return MagazineDischarge
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Add detail
+     *
+     * @param \ISETSO\MagazineBundle\Entity\Magazine\DetailMagazine $detail
+     *
+     * @return MagazineDischarge
+     */
+    public function addDetail(\ISETSO\MagazineBundle\Entity\Magazine\DetailMagazine $detail)
+    {
+        $this->detail[] = $detail;
+
+        return $this;
+    }
+
+    /**
+     * Remove detail
+     *
+     * @param \ISETSO\MagazineBundle\Entity\Magazine\DetailMagazine $detail
+     */
+    public function removeDetail(\ISETSO\MagazineBundle\Entity\Magazine\DetailMagazine $detail)
+    {
+        $this->detail->removeElement($detail);
+    }
+
+    /**
+     * Get detail
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDetail()
+    {
+        return $this->detail;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \ISETSO\UserBundle\Entity\User\User $user
+     *
+     * @return MagazineDischarge
+     */
+    public function setUser(\ISETSO\UserBundle\Entity\User\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \ISETSO\UserBundle\Entity\User\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+}

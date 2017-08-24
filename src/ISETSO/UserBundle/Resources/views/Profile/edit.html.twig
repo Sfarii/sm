@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+{% block breadcrumbActive %}{{ 'menu.user.setting'|trans }}{% endblock %}
+{% block body %}
+	<div data-widget-group="group1">
+		<div class="row">
+			<div class="col-sm-3">
+				{% include "ISETSOUserBundle:Profile:profileMenu.html.twig" %}
+			</div>
+			<div class="col-sm-9">
+				<div class="tab-content">
+					{% include "FOSUserBundle:Profile:edit_content.html.twig" %}	
+				</div>
+			</div>
+			<div class="panel-footer"></div>
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+{% block breadcrumb %}
+    <a href="{{ path('returnArticle_centralStore_index') }}">
+       {{ 'returnarticle.list.name'|trans }}
+    </a>
+{% endblock %}
+	 {% block breadcrumbActive %}{{ 'returnarticle.edit.name'|trans }}{% endblock %}
+{% block body %}
+    {% include 'Template/SingleFormTemplate.html.twig' with {'form': edit_form ,'form_name' : 'returnarticle.edit.name'|trans ,'submit_name': 'returnarticle.edit.submit'|trans } %}
+{% endblock %}

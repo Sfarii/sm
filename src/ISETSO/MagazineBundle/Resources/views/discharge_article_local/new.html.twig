@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets 
+        'bundles/isetsomagazine/plugins/datatables/dataTables.bootstrap.css'
+        'bundles/isetsomagazine/plugins/datatables/dataTables.themify.css'
+        'bundles/isetsomagazine/plugins/form-select2/select2.css'
+        'bundles/isetsomagazine/css/cssload-finger.css'
+        filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+    
+{% endblock %}
+{% block breadcrumb %}
+    <a href="{{ path('discharge_article_to_magazine_index') }}">
+       {{ 'dischargearticle.list.name'|trans }}
+    </a>
+{% endblock %}
+     {% block breadcrumbActive %}{{ 'dischargearticle.new.name'|trans }}{% endblock %}
+{% block body %}
+    
+    {% include 'Template/ArticleManagementAddFormTemplate.html.twig' with {'form_name': 'dischargearticle.new.name'|trans } %}
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts filter='?yui_js'
+        'bundles/isetsomagazine/plugins/datatables/jquery.dataTables.js'
+        'bundles/isetsomagazine/plugins/datatables/dataTables.bootstrap.js'
+        'bundles/isetsomagazine/myjs/datatables.js'
+        'bundles/isetsomagazine/plugins/form-select2/select2.min.js'
+        'bundles/isetsomagazine/myPlugins/discharge_article.js'
+        'bundles/isetsomagazine/myjs/add_discharge_local_article.js'
+        'bundles/isetsomagazine/plugins/form-daterangepicker/moment.min.js'
+        'bundles/isetsomagazine/plugins/bootstrap-datepicker/bootstrap-datepicker.js'
+        'bundles/isetsomagazine/myjs/date.js'
+    %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+ {% endblock %}

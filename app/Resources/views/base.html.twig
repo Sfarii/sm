@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale|split('_')[0] }}">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-touch-fullscreen" content="yes">
+        <meta name="description" content="PFE">
+        <meta name="author" content="BelhassenRami">
+
+        <title>{% block title %}{% trans %}project.name{% endtrans %} {% endblock %}</title>
+
+        {% block stylesheets %}
+            {% stylesheets
+                'bundles/isetsomagazine/fonts/font-awesome/css/font-awesome.min.css'
+                'bundles/isetsomagazine/fonts/themify-icons/themify-icons.css'
+                'bundles/isetsomagazine/css/styles.css'
+                'bundles/isetsomagazine/css/animate.css'
+                'bundles/isetsomagazine/css/message-box.css'
+                'bundles/isetsomagazine/css/message.css'
+                'bundles/isetsomagazine/plugins/pines-notify/pnotify.css'
+                'bundles/isetsomagazine/plugins/progress-skylo/skylo.css'
+                filter='cssrewrite' %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+            {% endstylesheets %}
+
+        {% endblock %}
+        {% block javascriptTop %}
+            {% javascripts filter='?yui_js'
+                'bundles/isetsomagazine/js/jquery-1.10.2.min.js'
+                'bundles/isetsomagazine/plugins/progress-skylo/skylo.js'
+                'bundles/isetsomagazine/js/jquery.nicescroll.js'
+            %}
+                <script src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+        {% endblock %}
+
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+    </head>
+    <body>
+        <script src="{{ asset('bundles/isetsomagazine/myjs/Progressbar.js')}}"></script>
+        {% block header %}
+            <div id="topnav" class="navbar navbar-default navbar-fixed-top  animated fadeInDown" role="banner">
+                <div class="logo-area">
+                    <span id="trigger-sidebar" class="toolbar-trigger toolbar-icon-bg">
+                        <a data-toggle="tooltips" data-placement="right" title="Toggle Sidebar">
+                            <span class="icon-bg">
+                                <i class="ti ti-menu"></i>
+                            </span>
+                        </a>
+                    </span>
+                    <a class="navbar-brand"></a>
+
+                </div><!-- logo-area -->
+                <ul class="nav navbar-nav toolbar pull-right">
+                        <li class="dropdown toolbar-icon-bg hidden-xs">
+                            <a href="{{ path ('fos_message_inbox') }}"><span class="icon-bg"><i class="ti ti-email"></i></span><span id="nb_msg"
+                                    class="badge badge-deeporange">{{ fos_message_nb_unread() }}</span></a>
+                            
+                        </li>
+                        <li class="dropdown toolbar-icon-bg">
+                            <a href="{{ url ('notification') }}"><span class="icon-bg"><i class="ti ti-bell"></i></span><span id="nb_notification" class="badge badge-deeporange"></span></a>
+                        </li>
+                        <li class="dropdown toolbar-icon-bg">
+                            <a href="#" class="dropdown-toggle username" data-toggle="dropdown">
+
+                                <span class="icon-bg"><i class="ti ti-user"></i> </span>
+
+                            </a>
+                            <ul class="dropdown-menu userinfo arrow" style="margin-top: 5px;">
+                                <li><a href="{{ path('fos_user_profile_show') }}"><i class="ti ti-user"></i><span>
+                                    {% trans %}menu.user.profile{% endtrans %}</span></a></li>
+                                <li><a href="{{ path('fos_user_profile_edit') }}"><i class="ti ti-settings"></i><span></span>{% trans %}menu.user.setting{% endtrans %}</a></li>
+                                <li class="divider"></li>
+                                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+
+                                    <li><a href="#"  class="mb-control" data-box="#mb-signout">
+                                       <i class="ti ti-shift-right"></i> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                                    </a></li>
+
+                                {% endif %}
+
+                            </ul>
+                        </li>
+
+                </ul>
+            </div>
+        {% endblock %}
+        <div id="wrapper">
+            <div id="layout-static">
+                {% block menu %}
+                    {% include 'menu.html.twig' %}
+                {% endblock %}
+                <div class="static-content-wrapper">
+                    <div class="static-content">
+                        <div class="page-content">
+                            <ol class="breadcrumb animated zoomIn">
+                                <li class="text text-capitalize"> <i class="ti ti-home"></i>
+                                {% block breadcrumb %}
+                                    <a href="{{ url ('dashboard_index') }}"><span> {% trans %}menu.dashbord{% endtrans %}</span></a>
+                                {% endblock %}
+                                </li>
+                                <li class="text text-capitalize"><i class="ti ti-tag"></i> <a class="active">
+                                    
+                                    {% block breadcrumbActive %}
+
+                                    {% endblock %}
+                                </a></li>
+                            </ol>
+                            <div class="container-fluid animated fadeIn">
+                                {% for flash_message in app.session.flashbag.get('msg') %}
+                                    <div class="alert alert-success animated zoomInDown" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <samp class="text-capitalize">
+                                            <i class="fa fa-info" ></i>
+                                            {{ flash_message }}
+                                        </samp>
+                                    </div>
+                                    {% endfor %}
+                                    {% for flash_message in app.session.flashbag.get('msgError') %}
+                                    <div class="alert alert-danger animated zoomInDown" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <samp class="text-capitalize">
+                                            <i class="fa fa-info" ></i>
+                                            {{ flash_message }}
+                                        </samp>
+                                    </div>
+                                {% endfor %}
+                                    {% block body %}
+                                    {% endblock %}
+                            </div> <!-- .container-fluid -->
+                        </div> <!-- #page-content -->
+                        {% block footer %}
+                        <footer role="contentinfo">
+                            <div class="clearfix">
+                                <ul class="list-unstyled list-inline pull-left">
+                                    <li><h6 style="margin: 0;">© 2016 Gestion de Magasin</h6></li>
+                                </ul>
+                                <button class="pull-right btn btn-link btn-xs hidden-print" id="back-to-top"><i class="ti ti-arrow-up"></i></button>
+                            </div>
+                        </footer>
+                        {% endblock %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- MESSAGE BOX-->
+        <div class="message-box animated fadeIn" data-sound="alert" id="mb-signout">
+            <div class="mb-container">
+                <div class="mb-middle">
+                    <div class="mb-title"><span class="fa fa-sign-out"></span> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }} ?</div>
+                    <div class="mb-content">
+                        <p>{% trans %}logout.message{% endtrans %}</p>
+                        <p>{% trans %}logout.info{% endtrans %}</p>
+                    </div>
+                    <div class="mb-footer">
+                        <div class="pull-right">
+                            <a class="btn btn-success btn-lg" href="{{ path('fos_user_security_logout') }}">
+                               {% trans %}messageBox.yes{% endtrans %}
+                            </a>
+                            <button class="btn btn-default btn-lg mb-control-close">{% trans %}messageBox.no{% endtrans %}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END MESSAGE BOX-->
+        {% block audio %}
+            <audio id="audio-alert" src="{{ asset('bundles/isetsomagazine/audio/alert.mp3')}}" preload="auto">
+            </audio>
+            <audio id="audio-fail" src="{{ asset('bundles/isetsomagazine/audio/fail.mp3')}}" preload="auto">
+            </audio>
+            <audio id="audio-newMessage" src="{{ asset('bundles/isetsomagazine/audio/newMessage.wav')}}" preload="auto">
+            </audio>
+        {% endblock %}
+
+        {% block javascripts %}
+            {% javascripts filter='?yui_js'
+                'bundles/isetsomagazine/js/jqueryui-1.10.3.min.js'
+                'bundles/isetsomagazine/js/bootstrap.min.js'
+                'bundles/isetsomagazine/js/enquire.min.js'
+                'bundles/isetsomagazine/plugins/wijets/wijets.js'
+                'bundles/isetsomagazine/plugins/codeprettifier/prettify.js'
+
+                'bundles/isetsomagazine/plugins/nanoScroller/js/jquery.nanoscroller.min.js'
+                'bundles/isetsomagazine/js/message-box.js'
+                'bundles/isetsomagazine/js/application.js'
+                'bundles/fosjsrouting/js/router.js'
+                'bundles/isetsomagazine/plugins/pines-notify/pnotify.min.js'
+
+                'bundles/bazingajstranslation/js/translator.min.js'
+            %}
+                <script src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+            <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+            <script src="{{ url('bazinga_jstranslation_js') }}"></script>
+            <script type="text/javascript">
+                $.skylo('end');
+            </script>
+            <script src="{{ asset('bundles/isetsomagazine/myjs/base.js')}}"></script>
+
+        {% endblock %}
+    </body>
+</html>

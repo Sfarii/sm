@@ -1,0 +1,7 @@
+services:
+  user.history_manager:
+    class: ISETSO\UserBundle\Services\UserHistoryManager
+    arguments: ["@doctrine.orm.entity_Manager"]
+  user.entity_manager:
+    class: ISETSO\UserBundle\Services\UserEntityManager
+    arguments: ["@doctrine.orm.entity_Manager","@knp_paginator","@security.authorization_checker","@security.role_hierarchy"]

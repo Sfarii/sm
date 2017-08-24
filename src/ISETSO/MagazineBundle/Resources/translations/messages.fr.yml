@@ -1,0 +1,700 @@
+#role est permission
+ROLE_GESTION_UNIT: Gestion des unité
+ROLE_GESTION_ARTICLE: Gestion des article
+ROLE_GESTION_LOCAL: Gestion des local
+ROLE_GESTION_TYPE_LOCAL: Gestion des type local
+ROLE_GESTION_ORIGIN: Gestion des Origine
+ROLE_GESTION_PROVIDER: Gestion des Fournisseur
+ROLE_GESTION_ACTIVITY_DOMAIN: Gestion de Domain d'activité
+ROLE_GESTION_FAMILY: Gestion de famille
+ROLE_GESTION_SUBFAMILY: Gestion de Sous-Famille
+ROLE_GESTION_JOURNAL: Gestion de livre journal
+ROLE_GESTION_DISCHARGE_TO_USER: Gestion de Décharge vers l'utilisateur
+ROLE_GESTION_DISCHARGE_TO_MAGAZINE:  Gestion de Décharge vers le magasin
+ROLE_GESTION_ORDER: Gestion d'order
+ROLE_GESTION_RETURN: Gestion de retour
+ROLE_GESTION_USER: Gestion de utilisateur
+ROLE_GESTION_MAGAZINE: Gestion de magasin
+ROLE_GESTION_GROUP: Gestion de group
+ROLE_USER: simple Utilisateur
+ROLE_SUPER_ADMIN: administrateur général
+role: roles
+view: Voir
+add: Ajouter
+delete: supprimée
+edit: modifiée
+manager: responsable
+#message js
+new: nouveau
+#padding
+Previous: Précédent
+Next: Suivant
+#form
+
+form:
+    firstStep: 1ére etape
+    secondStep: 2éme etape
+formError:
+    price: Le Prix doit étre entre 1 et 1000
+    quantity: Le Quantité doit étre entre 1 et 1000
+    notNull:  Cette valeur ne doit pas être vide
+    unique: Cette valeur est déjà utilisée.
+#search
+search:
+    journal: Livre journal
+    stock: Stock
+    bl: Bonde Livrison
+    facture: Facture
+    supportingdocument: Pièces justificatives
+    discharge: Décharge
+    return: retour
+    order: Bonde commande
+    magasinCentral: Magasin Central
+    subMagazine: Sous-Magasin
+    quantity: Quantité
+    filter: Filter
+    listmagazine: Liste
+    listarticle: Liste d'article
+#menu
+project:
+    name: PFE Project!
+menu:
+    message: 
+        name: Messages
+    user:
+        profile: profile
+        setting: Paramètres
+        history: Mon Activité
+        password: Mot de passe
+    stock: Fiche de Stock
+    home: Accueil
+    inventary: inventaire
+    dashbord: Tableau de bord
+    dropDownFamily:
+        name: Familles des articles
+        family: Familles
+        subFamily: Sous Familles
+    dropDownJournal:
+        name: Livre journal
+        consumable: consommables
+        durable: durables
+        origin: Origine
+    dropDownArticle:
+        name: Fiche article
+        consumable: consommables
+        durable: durables
+        unit: unité 
+    dropDownSupportingDocument:
+        name: Pièces justificatives
+        order: Bon de commande
+        return: Bon de retour
+        returnToCentralMagazine: vers Magasin Central
+        returnToSubMagazine: vers Sous-Magasin
+        discharge: Décharge
+        dischargeToMagazine: vers magazine
+        dischargeToUser: vers user
+        dischargeToLocal: vers Local
+        myDischarge: Mon Décharge
+        listdischarge: Liste de Décharge
+        myReturn: mon Rétour
+        myOrder: mon Commande
+    dropDownLocal:
+        name: Locaux
+        local: Local
+        typeLocal: Type Local
+    dropDownProvider:
+        name: Fournisseur
+        provider: Fournisseurs
+        activitySector: domain d'activité
+    dropDownUser:
+        name: Utilisateurs
+        user: utilisateurs
+        group: Groups
+    magazine:
+        name: Magasin
+        subMagazine: Sous-Magasin
+        magazine: Magasin
+logout:
+    message: Êtes-vous sûr de vouloir vous déconnecter?
+    info: Appuyez sur Non si vous souhaitez continuer à travailler. Appuyez sur Oui pour déconnecter l'utilisateur actuel.
+#field of dataBase
+magazine:
+    printAll: Imprimer Tous
+    journal: LIST DE JOURNAL
+    stock: LIST DE STOCK
+    inventory: LIST DE INVENTAIRE
+    order: LIST DE BONDE COMMANDE
+    infoOrder: INFORMATION SUR BONDE COMMANDE
+    infoDischarge: INFORMATION SUR DECHARGE
+    infoReturn: INFORMATION SUR RETOUR
+    discharge: LIST DE DECHARGE
+    return: LIST DE RETOUR
+    exit: votre travail sera perdu
+    devise: Dinar
+    footer: © Sousse Erriadh B.P. 135 - 4023 Telephone : (216) 73 30 79 60 / 61  - Fax : (216) 73 30 79 63
+    action: Actions
+    etat: en attent
+    etatOption:
+        accept: valider
+        refuse: refuser
+        wait: en cours de vérification
+    placeholder:
+        default: Ecrivez ici
+        etat: -- Selectionnée l'etat --
+        family: -- Selectionnée un Famille --
+        subFamily: -- Selectionnée un Sous-Famille -- 
+        unit: -- Selectionnée une unité -- 
+        activityDomain: -- Selectionnée une domain d'activité -- 
+        local: -- Selectionnée une local -- 
+        typelocal: -- Selectionnée un type local --
+        provider: -- Selectionnée un Fournisseur --
+        origin:  -- Selectionnée un Origine --
+        type: -- Selectionnée un Type --
+        article: -- Selectionnée un article --
+        magazine: -- Selectionnée un magasin --
+        user: -- Selectionnée un utilisateur --
+        articleDurable: -- Selectionnée un article durable --
+        articleConsumable: -- Selectionnée un article consommable --
+        inventoryNumber: -- Selectionnée un Numéro d'inventaire --
+    field:
+        inventoryNumber: Numéro d'unventaire
+        discharge: Décharge 
+        return: Rétour
+        input: Entrées
+        article: article
+        stock: Reste en stock
+        price: Prix
+        quantity: quantité
+        quantityReturned: quantité retourné
+        id: "#"
+        designation: designation
+        description: description
+        userName: Creé par l'utilisateur
+        socialReason: raison social 
+        phone: téléphone
+        address: addresse
+        fax: fax
+        email: e-mail
+        contact: contact
+        minThreshold: suiel min
+        maxThreshold: suiel max
+        observation: Observation
+        date: date Entrée
+        type: type de Livre journal
+        origin: origine
+        family: famille
+        garenti: garenti
+        typeLocal: Type Local
+        activityDomain: domain d'activité
+        unit: unité
+        subFamily: Sous-Famille
+        local: local
+        role: Role
+        firstName: Nom
+        lastName: Prénom
+        function: Position
+        groupName: Nom de Group
+        permission: Permission
+        provider: Fournisseur
+        toUser: vers l'utilisateur
+        etat: etat
+        tomagazin: vers magazine
+        locked: Locker
+        expired: expiré
+        dateExpired: date de expiré
+        groups: groups
+        total: Total
+        inCharge: Résponsable
+messageBox:
+    yes: oui
+    no: non
+expired:
+    yes: expiré cette Compte
+    no: no expiré cette Compte
+Rechercher: Rechercher
+action:
+    update: Modification
+    delete: Supprition
+    new: Ajoute
+history:
+    link: plus d'information
+#family
+family:
+    edit:
+        name: Modification d'une famille
+        submit: Modifier
+    show:
+        name: Afficher Sous-Famille
+    delete:
+        name: Supprimée Cette Famille
+        message: êtes-vous sûr de vouloir supprimer cette famille
+    new:
+        name: Creation d'une famille
+        submit: Créer une famille
+    list:
+        name: liste de famille
+        resultFound: Resultat Trouver
+        search: Rechercher
+        noResultFound: aucun resultat trouvé
+    flash:
+        updated: La famille a été modifiée
+        created: La famille a été crée
+        deleted: La famille a été supprimée 
+#sub family
+subfamily:
+    edit:
+        name: Modification d'une Sous-Famille
+        submit: Modifier
+    show:
+        name: Afficher Sous-Famille
+    delete:
+        name: Supprimée Cette Sous-Famille
+        message: êtes-vous sûr de vouloir supprimer cette Sous-Famille
+    new:
+        name: Creation d'une Sous-Famille
+        submit: Créer une Sous-Famille
+    list:
+        name: liste de Sous-Famille
+        resultFound: Resultat Trouver
+        search: Rechercher
+        noResultFound: aucun resultat trouvé
+    flash:
+        updated: La Sous-Famille a été modifiée
+        created: La Sous-Famille a été crée
+        deleted: La Sous-Famille a été supprimée 
+#unit
+unit:
+    edit:
+        name: Modification d'une unité
+        submit: Modifier
+    show:
+        name: Afficher unité
+    delete:
+        name: Supprimée Cette unité
+        message: êtes-vous sûr de vouloir supprimer cette unité
+    new:
+        name: Creation d'une unité
+        submit: Créer une unité
+    list:
+        name: liste de unité
+        resultFound: Resultat Trouver
+        search: Rechercher
+        noResultFound: aucun resultat trouvé
+    flash:
+        updated: La unité a été modifiée
+        created: La unité a été crée
+        deleted: La unité a été supprimée 
+#local
+local:
+    edit:
+        name: Modification d'une local
+        submit: Modifier
+    show:
+        name: Afficher local
+    delete:
+        name: Supprimée Cette local
+        message: êtes-vous sûr de vouloir supprimer cette local
+    new:
+        name: Creation d'une local
+        submit: Créer une local
+    list:
+        name: liste de local
+        resultFound: Resultat Trouver
+        search: Rechercher
+        noResultFound: aucun resultat trouvé
+    flash:
+        updated: La local a été modifiée
+        created: La local a été crée
+        deleted: La local a été supprimée 
+#typelocal
+typelocal:
+    edit:
+        name: Modification d'une type local
+        submit: Modifier
+    show:
+        name: Afficher type local
+    delete:
+        name: Supprimée Cette type local
+        message: êtes-vous sûr de vouloir supprimer cette type local
+    new:
+        name: Creation d'une type local
+        submit: Créer une type local
+    list:
+        name: liste de type local
+        resultFound: Resultat Trouver
+        search: Rechercher
+        noResultFound: aucun resultat trouvé
+    flash:
+        updated: Le type local a été modifiée
+        created: Le type local a été crée
+        deleted: Le type local a été supprimée 
+#provider
+provider:
+    edit:
+        name: Modification d'une Fournisseur
+        submit: Modifier
+    show:
+        name: Afficher Fournisseur
+    delete:
+        name: Supprimée Cette Fournisseur
+        message: êtes-vous sûr de vouloir supprimer cette Fournisseur
+    new:
+        name: Creation d'une Fournisseur
+        submit: Créer une Fournisseur
+    list:
+        name: liste de Fournisseur
+        resultFound: Resultat Trouver
+        search: Rechercher
+        noResultFound: aucun resultat trouvé
+    flash:
+        updated: Le Fournisseur a été modifiée
+        created: Le Fournisseur a été crée
+        deleted: Le Fournisseur a été supprimée 
+#activity
+activitydomain:
+    edit:
+        name: Modification d'une Domain activité
+        submit: Modifier
+    show:
+        name: Afficher Domain activité
+    delete:
+        name: Supprimée Cette Domain activité
+        message: êtes-vous sûr de vouloir supprimer cette Domain activité
+    new:
+        name: Creation d'une Domain activité
+        submit: Créer une Domain activité
+    list:
+        name: liste de Domain activité
+        resultFound: Resultat Trouver
+        search: Rechercher
+        noResultFound: aucun resultat trouvé
+    flash:
+        updated: Le Domain activité a été modifiée
+        created: Le Domain activité a été crée
+        deleted: Le Domain activité a été supprimée 
+#Articleconsumable
+articleconsumable:
+    edit:
+        name: Modification d'une Article consommable
+        submit: Modifier
+    show:
+        name: Afficher Article consommable
+    delete:
+        name: Supprimée Cette Article consommable
+        message: êtes-vous sûr de vouloir supprimer cette Article consommable
+    new:
+        name: Creation d'une Article consommable
+        submit: Créer une Article consommable
+    list:
+        name: liste de Article consommable
+        resultFound: Resultat Trouver
+        search: Rechercher
+        noResultFound: aucun resultat trouvé
+articleConsumable:
+    flash:
+        updated: L'Article consommable a été modifiée
+        created: L'Article consommable a été crée
+        deleted: L'Article consommable a été supprimée 
+#Articledurable
+articledurable:
+    edit:
+        name: Modification d'une Article durable
+        submit: Modifier
+    show:
+        name: Afficher Article durable
+    delete:
+        name: Supprimée Cette Article durable
+        message: êtes-vous sûr de vouloir supprimer cette Article durable
+    new:
+        name: Creation d'une Article durable
+        submit: Créer une Article durable
+    list:
+        name: liste des Articles durables
+        resultFound: Resultat Trouver
+        search: Rechercher
+        noResultFound: aucun resultat trouvé
+    flash:
+        updated: L'Article durable a été modifiée
+        created: L'Article durable a été crée
+        deleted: L'Article durable a été supprimée 
+#origin
+origin:
+    edit:
+        name: Modification d'une origine
+        submit: Modifier
+    show:
+        name: Afficher origine
+    delete:
+        name: Supprimée Cette origine
+        message: êtes-vous sûr de vouloir supprimer cette origine
+    new:
+        name: Creation d'une origine
+        submit: Créer une origine
+    list:
+        name: liste de origine
+        resultFound: Resultat Trouver
+        search: Rechercher
+        noResultFound: aucun resultat trouvé
+    flash:
+        updated: Le origine a été modifiée
+        created: Le origine a été crée
+        deleted: Le origine a été supprimée 
+#Orderarticle
+orderarticle:
+    edit:
+        name: Modification d'une bon commande
+        submit: Modifier
+    show:
+        name: Afficher bon commande
+    delete:
+        name: Supprimée Cette bon commande
+        message: êtes-vous sûr de vouloir supprimer cette bon commande
+    new:
+        name: Creation d'une bon commande
+        submit: Créer une bon commande
+    list:
+        name: liste de bon commande
+        resultFound: Resultat Trouver
+        search: Rechercher
+        noResultFound: aucun resultat trouvé
+    flash:
+        updated: La bon commande a été modifiée
+        created: La bon commande a été crée
+        deleted: La bon commande a été supprimée 
+#journaldurable
+journaldurable:
+    edit:
+        name: Modification d'une ligne de livre journal durable
+        submit: Modifier
+    show:
+        name: Afficher ligne de livre journal durable
+    delete:
+        name: Supprimée Cette ligne de livre journal durable
+        message: êtes-vous sûr de vouloir supprimer cette ligne de livre journal durable
+    new:
+        name: Creation d'une ligne de livre journal durable
+        submit: Créer une ligne de livre journal durable
+    list:
+        name: liste des lignes des livres journals durables
+        resultFound: Resultat Trouver
+        search: Rechercher
+        noResultFound: aucun resultat trouvé
+journalDurable:
+    flash:
+        updated: Le ligne de livre journal durable a été modifiée
+        created: Le ligne de livre journal durable a été crée
+        deleted: Le ligne de livre journal durable a été supprimée
+        info: il faut ajouter au moin un piéce justificative
+#journalconsumable
+journalconsumable:
+    edit:
+        name: Modification d'une ligne de livre journal consommable
+        submit: Modifier
+    show:
+        name: Afficher ligne de livre journal consommable
+    delete:
+        name: Supprimée Cette ligne de livre journal consommable
+        message: êtes-vous sûr de vouloir supprimer cette ligne de livre journal consommable
+    new:
+        name: Creation d'une ligne de livre journal consommable
+        submit: Créer une ligne de livre journal consommable
+    list:
+        name: liste de ligne de livre journal consommable
+        resultFound: Resultat Trouver
+        search: Rechercher
+        noResultFound: aucun resultat trouvé
+journalConsumable:
+    flash:
+        updated: Le ligne de livre journal consommable a été modifiée
+        created: Le ligne de livre journal consommable a été crée
+        deleted: Le ligne de livre journal consommable a été supprimée 
+        info: il faut ajouter au moin un piéce justificative
+#returnarticle
+returnarticle:
+    edit:
+        name: Modification d'une retour
+        submit: Modifier
+    show:
+        name: Afficher retour
+    delete:
+        name: Supprimée Cette retour
+        message: êtes-vous sûr de vouloir supprimer cette retour
+    new:
+        name: Creation d'une retour
+        submit: Créer une retour
+    list:
+        name: liste des retours
+        resultFound: Resultat Trouver
+        search: Rechercher
+        noResultFound: aucun resultat trouvé
+    flash:
+        updated: Le retour a été modifiée
+        created: Le retour a été crée
+        deleted: Le retour a été supprimée 
+#dischargearticle
+dischargearticle:
+    edit:
+        name: Modification d'une Décharge
+        submit: Modifier
+    show:
+        name: Afficher Décharge
+    delete:
+        name: Supprimée Cette Décharge
+        message: êtes-vous sûr de vouloir supprimer cette Décharge
+    new:
+        name: Creation d'une Décharge
+        submit: Créer une Décharge
+    list:
+        name: liste de Décharge
+        resultFound: Resultat Trouver
+        search: Rechercher
+        noResultFound: aucun resultat trouvé
+    flash:
+        updated: La Décharge a été modifiée
+        created: La Décharge a été crée
+        deleted: La Décharge a été supprimée 
+#user
+user:
+    etat:
+        expired: expiré
+        notExpired: non expiré
+        locked: locker
+        notLocked: non locker
+    new: 
+        name:   Création d'utilisateur
+        submit: Créer un utilisateur
+    edit:
+        name: Modifiée le Droit de l'utilisateur
+        permission: Modifiée le permission de l'utilisateur
+        submit: modifiée
+    list: 
+        name: Liste des utilisateurs
+        resultFound: utilisateurs existe
+        noResultFound: aucun resultat trouvé
+    noInfo: aucun information
+    expired:
+        name: expiré Cette Compte
+    locked:
+        name: Locker Cette Compte
+        message: êtes-vous sûr de vouloir locker Cette Compte
+    unlock:
+        name: UnLocker Cette Compte
+        message: êtes-vous sûr de vouloir unlocker Cette Compte
+    flash:
+        updated: L'utilisateurs a été modifiée
+        deleted: L'utilisateurs a été supprimée
+    notification:
+        name: utilisateur notification
+        by: Poster par
+usergroup:
+    new: 
+        name:   Création d'group
+        submit: Créer un group
+    delete:
+        name: Supprimée Cette group
+        message: êtes-vous sûr de vouloir supprimer cette group
+    edit:
+        name: Modifiée le Droit de l'group
+        permission: Modifiée le permission de l'group
+        submit: modifiée
+    list: 
+        name: Liste des groups
+        resultFound: group existe
+        noResultFound: aucun resultat trouvé
+    flash:
+        updated: L'group a été modifiée
+        deleted: L'group a été supprimée
+#supportingdocument
+supportingdocument:
+    edit:
+        name: Modification d'une Pièces justificatives
+        submit: Modifier
+        annuler: annuler
+    show:
+        name: Afficher Pièces justificatives
+    delete:
+        name: Supprimée Cette Pièces justificatives
+        message: êtes-vous sûr de vouloir supprimer cette Pièces justificatives
+    new:
+        name: Créer ou modifiée une Pièces justificatives
+        submit: Ajouter
+    list:
+        name: Liste de Pièces justificatives
+        resultFound: Resultat Trouver
+        search: Rechercher
+        noResultFound: aucun resultat trouvé
+    flash:
+        updated: La Pièce justificative a été modifiée
+        created: La Pièce justificative a été crée
+        deleted: La Pièce justificative a été supprimée 
+        existe: le Pièce justificative déja creé
+#detail
+detail:
+    edit:
+        name: Modification d'une Detail
+        submit: Modifier
+        annuler: annuler
+    show:
+        name: Afficher Detail
+    delete:
+        name: Supprimée Cette Detail
+        message: êtes-vous sûr de vouloir supprimer cette Detail
+    new:
+        name: Créer ou modifiée une Detail
+        submit: Ajouter une Detail
+    list:
+        name: Liste des Detail
+        resultFound: Resultat Trouver
+        search: Rechercher
+        noResultFound: aucun resultat trouvé
+    flash:
+        updated: La détail a été modifiée
+        created: La détail a été crée
+        deleted: La détail a été supprimée 
+        info: il faut ajouter au moin un detail piéce
+#magazine
+magazin:
+    edit:
+        name: Modification d'une magazine
+        submit: Modifier
+        annuler: annuler
+    show:
+        name: Afficher magazine
+    delete:
+        name: Supprimée Cette magazine
+        message: êtes-vous sûr de vouloir supprimer cette magazine
+    new:
+        name: Créer ou modifiée une magazine
+        submit: Ajouter une magazine
+    list:
+        name: Liste des magazines
+        article: Liste des articles
+        resultFound: Resultat Trouver
+        search: Rechercher
+        noResultFound: aucun resultat trouvé
+    flash:
+        updated: La magazin a été modifiée
+        created: La magazin a été crée
+        deleted: La magazin a été supprimée 
+magazineDischarge:
+    edit:
+        name: Modification d'une discharge magazine
+        submit: Modifier
+        annuler: annuler
+    show:
+        name: Afficher discharge magazine
+    delete:
+        name: Supprimée Cette discharge magazine
+        message: êtes-vous sûr de vouloir supprimer cette discharge magazine
+    new:
+        name: Créer ou modifiée une discharge magazine
+        submit: Ajouter une discharge magazine
+    list:
+        name: Liste des discharge magazines
+        resultFound: Resultat Trouver
+        search: Rechercher
+        noResultFound: aucun resultat trouvé
+    flash:
+        updated: La discharge magazin a été modifiée
+        created: La discharge magazin a été crée
+        deleted: La discharge magazin a été supprimée 

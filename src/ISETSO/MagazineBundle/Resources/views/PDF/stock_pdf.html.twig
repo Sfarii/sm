@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-touch-fullscreen" content="yes">
+        <meta name="description" content="PFE">
+        <meta name="author" content="BelhassenRami">
+
+        {% block stylesheets %}
+            {% stylesheets 
+                'bundles/isetsomagazine/fonts/font-awesome/css/font-awesome.min.css'
+                'bundles/isetsomagazine/fonts/themify-icons/themify-icons.css'
+                'bundles/isetsomagazine/css/styles.css'
+                filter='cssrewrite' %}
+            <link rel="stylesheet" href="{{ app.request.getSchemeAndHttpHost() ~ asset_url }}" />
+            {% endstylesheets %}
+        {% endblock %}
+        <style type="text/css">
+        thead {display: table-header-group;}
+        tr {page-break-inside: avoid;}
+        div{page-break-inside: avoid;}
+    </style>
+</head>
+<body style="background-color: white;padding-bottom: 20%">
+    <div class="page-content">
+        <div class="container-fluid" style="padding-top: 5%">                 
+            <div class="row mb-xl">
+                <div class="col-md-12">
+                    <div class="pull-left">
+                        <h1 class="text-primary text-center" style="font-weight: bold; font-size:12pt; color: black">INSTITUT SUPÉRIEUR<br>DES ÉTUDES TECHNOLOGIQUES<br>SOUSSE
+                        </h1>
+                    </div>
+                    <div class="pull-right">
+                        <img src="{{ app.request.getSchemeAndHttpHost() ~ asset('bundles/isetsomagazine/img/logo-big.png') }}" class="mt-md mb-md" alt="ISETSO">
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-xl">
+                <div class="col-md-12">
+                    <h1 class="text-primary text-center" style="font-weight: bold; color: black">
+                        {{ 'magazine.stock'|trans }}
+                    </h1>
+                </div>
+            </div>
+            <div class="panel panel-teal" style="visibility: visible; opacity: 1; display: block; transform: translateY(0px);">
+                <div class="panel-heading"></div>
+                <div class="panel-body no-padding">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr class="info">
+                                <th>#</th>
+                                <th>{{ 'magazine.field.article'|trans }}</th>
+                                <th>{{ 'magazine.field.price'|trans }}</th>
+                                <th>{{ 'magazine.field.input'|trans }}</th>
+                                <th>{{ 'magazine.field.discharge'|trans }}</th>
+                                <th>{{ 'magazine.field.return'|trans }}</th>
+                                <th>{{ 'magazine.field.unit'|trans }}</th>
+                                <th>{{ 'magazine.field.stock'|trans }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for stock in listStock %}
+                                <tr>
+                                    <td>{{ stock.id_article }}</td>
+                                    <td>{{ stock.article_name }}</td>
+                                    <td>{{ stock.price }}</td>
+                                    <td>{{ stock.qte }}</td>
+                                    <td>{{ stock.discharge }}</td>
+                                    <td>{{ stock.returned }}</td>
+                                    <td>{{ stock.unit }}</td>
+                                    <td>{{ (stock.returned + stock.qte) - stock.discharge }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
+        </div> <!-- .container-fluid -->
+    </div> <!-- #page-content --> 
+</body>
+</html>

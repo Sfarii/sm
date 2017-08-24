@@ -1,0 +1,252 @@
+<?php
+
+namespace ISETSO\MagazineBundle\Entity\Article;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use ISETSO\MagazineBundle\Model\Security;
+
+/**
+ * Article
+ *
+ * @ORM\Entity(repositoryClass="ISETSO\MagazineBundle\Repository\Article\ArticleRepository")
+ * @ORM\InheritanceType("JOINED")
+ * @UniqueEntity("designation")
+ * 
+ */
+class Article extends Security
+{
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * 
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="designation", type="string", length=255,  unique=true)
+     * @Assert\NotBlank()
+     */
+    private $designation;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Unit", inversedBy="articles")
+     * @ORM\JoinColumn(name="unit_id", referencedColumnName="id")
+     * @Assert\NotBlank()
+     */
+    private $unit;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="ISETSO\MagazineBundle\Entity\Family\SubFamily", inversedBy="articles")
+     * @ORM\JoinColumn(name="subfamily_id", referencedColumnName="id")
+     * @Assert\NotBlank()
+     */
+    private $subFamily;
+
+    /**
+     * @ORM\OneToMany(targetEntity="ISETSO\MagazineBundle\Entity\Journal\SupportingDocument", mappedBy="article" ,fetch="EXTRA_LAZY")
+     */
+    private $supportingDocuments;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="ISETSO\UserBundle\Entity\User\User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
+
+    /**
+     * @ORM\OneToMany(targetEntity="ISETSO\MagazineBundle\Entity\DetailArticleManagement\DetailOrderArticle", mappedBy="article" ,fetch="EXTRA_LAZY")
+     */
+    private $detailOrder;
+
+    
+    
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->supportingDocuments = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set designation
+     *
+     * @param string $designation
+     *
+     * @return Article
+     */
+    public function setDesignation($designation)
+    {
+        $this->designation = $designation;
+
+        return $this;
+    }
+
+    /**
+     * Get designation
+     *
+     * @return string
+     */
+    public function getDesignation()
+    {
+        return $this->designation;
+    }
+
+    /**
+     * Set unit
+     *
+     * @param \ISETSO\MagazineBundle\Entity\Article\Unit $unit
+     *
+     * @return Article
+     */
+    public function setUnit(\ISETSO\MagazineBundle\Entity\Article\Unit $unit = null)
+    {
+        $this->unit = $unit;
+
+        return $this;
+    }
+
+    /**
+     * Get unit
+     *
+     * @return \ISETSO\MagazineBundle\Entity\Article\Unit
+     */
+    public function getUnit()
+    {
+        return $this->unit;
+    }
+
+    /**
+     * Set subFamily
+     *
+     * @param \ISETSO\MagazineBundle\Entity\Family\SubFamily $subFamily
+     *
+     * @return Article
+     */
+    public function setSubFamily(\ISETSO\MagazineBundle\Entity\Family\SubFamily $subFamily = null)
+    {
+        $this->subFamily = $subFamily;
+
+        return $this;
+    }
+
+    /**
+     * Get subFamily
+     *
+     * @return \ISETSO\MagazineBundle\Entity\Family\SubFamily
+     */
+    public function getSubFamily()
+    {
+        return $this->subFamily;
+    }
+
+    /**
+     * Add supportingDocument
+     *
+     * @param \ISETSO\MagazineBundle\Entity\Journal\SupportingDocument $supportingDocument
+     *
+     * @return Article
+     */
+    public function addSupportingDocument(\ISETSO\MagazineBundle\Entity\Journal\SupportingDocument $supportingDocument)
+    {
+        $this->supportingDocuments[] = $supportingDocument;
+
+        return $this;
+    }
+
+    /**
+     * Remove supportingDocument
+     *
+     * @param \ISETSO\MagazineBundle\Entity\Journal\SupportingDocument $supportingDocument
+     */
+    public function removeSupportingDocument(\ISETSO\MagazineBundle\Entity\Journal\SupportingDocument $supportingDocument)
+    {
+        $this->supportingDocuments->removeElement($supportingDocument);
+    }
+
+    /**
+     * Get supportingDocuments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSupportingDocuments()
+    {
+        return $this->supportingDocuments;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \ISETSO\UserBundle\Entity\User\User $user
+     *
+     * @return Article
+     */
+    public function setUser(\ISETSO\UserBundle\Entity\User\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \ISETSO\UserBundle\Entity\User\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Add detailOrder
+     *
+     * @param \ISETSO\MagazineBundle\Entity\DetailArticleManagement\DetailOrderArticle $detailOrder
+     *
+     * @return Article
+     */
+    public function addDetailOrder(\ISETSO\MagazineBundle\Entity\DetailArticleManagement\DetailOrderArticle $detailOrder)
+    {
+        $this->detailOrder[] = $detailOrder;
+
+        return $this;
+    }
+
+    /**
+     * Remove detailOrder
+     *
+     * @param \ISETSO\MagazineBundle\Entity\DetailArticleManagement\DetailOrderArticle $detailOrder
+     */
+    public function removeDetailOrder(\ISETSO\MagazineBundle\Entity\DetailArticleManagement\DetailOrderArticle $detailOrder)
+    {
+        $this->detailOrder->removeElement($detailOrder);
+    }
+
+    /**
+     * Get detailOrder
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDetailOrder()
+    {
+        return $this->detailOrder;
+    }
+}

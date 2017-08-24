@@ -1,0 +1,39 @@
+{% block extends %}
+{{ "{% extends 'base.html.twig' %}" }}
+{% endblock extends %}
+{{ "{% block breadcrumb %}" }}
+    <a href="{{ "{{ path('" ~ route_name_prefix ~ "_index') }}" }}">
+       {{ "{{ '"~ entity|lower~".list.name'|trans }}" }}
+    </a>
+{{ "{% endblock %}" }}
+	{{ " {% block breadcrumbActive %}{{ '"~ entity|lower~".edit.name'|trans }}{% endblock %}" }}
+{% block body %}
+{{ "{% block body %}" }}
+<div data-widget-group="group1">
+    <div class="panel panel-default" data-widget='{"draggable": "false"}'>
+        <div class="panel-heading">
+            <h2><i class="ti ti-pencil-alt"></i> {{"{{ '"~ entity|lower~".edit.name'|trans }}"}}</h2>
+            <div class="panel-ctrls" data-actions-container="" data-action-collapse='{"target": ".panel-body"}'></div>
+        </div>
+        <div class="panel-editbox" data-widget-controls=""></div>
+        <div class="panel-body">
+	    {{ "{{ form_start(edit_form ,{
+                        'attr' : { 'class' : 'form-horizontal row-border' } 
+                    }) }}" }}
+
+	        {{ '{{ form_widget(edit_form) }}' }}
+	    		<div class="form-group">
+                    <div class="col-sm-8 col-sm-offset-2">
+                    <button class="btn btn-primary " type="submit">
+                        <i class="ti ti-pencil-alt"></i>
+                        {{"{{ '"~ entity|lower~".edit.submit'|trans }}"}}
+                    </button>
+                    </div>
+                </div>
+            {{ '{{ form_end(edit_form) }}' }}
+        </div>
+        <div class="panel-footer"></div>
+    </div>
+</div>
+{{ "{% endblock %}" }}
+{% endblock body %}

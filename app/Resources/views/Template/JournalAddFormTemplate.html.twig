@@ -1,0 +1,199 @@
+<div class="panel panel-primary" data-widget='{"draggable": "false"}'>
+    <div class="panel-heading">
+        <h2><i class="ti ti-save-alt"></i> {{ form_name }}</h2>
+        <div class="panel-ctrls button-icon-bg" 
+                        data-actions-container="" 
+                        data-action-collapse='{"target": ".panel-body"}'
+                        data-action-colorpicker=''
+                        data-action-refresh-demo='{"type": "circular"}'
+                        >
+                    </div>
+    </div>
+    <div class="panel-body">
+        <ul id="basicwizard-header"  class="stepy-header">
+            <li id="basicwizard-head-0"  class="stepy-active" style="cursor: default;">
+                <a href="#">
+                    <div>{{ 'form.firstStep'|trans }}</div>
+                    <span>{{ 'journalconsumable.new.name'|trans }}</span>
+                    
+                </a>
+            </li>
+            <li id="basicwizard-head-1"  style="cursor: default;">
+                <a href="#">
+                    <div>{{ 'form.secondStep'|trans }}</div>
+                    <span>{{ 'supportingdocument.new.name'|trans }}</span>
+                </a>
+            </li>
+        </ul>
+            <div id="step2" class="col-md-12" style="visibility: hidden;display: none;">
+                <div class="col-md-6 " style="border-right: 1px solid black;">
+                    <legend><h4><i class="ti ti-save-alt"></i> {{ 'supportingdocument.new.name'|trans }}</h4></legend>
+                        
+                       
+                        {{ form_start(formSupportingDocument,{
+                            'attr' : { 'class' : 'form-horizontal row-border' , 'id' : 'validate-form'} 
+                        }) }}
+                        <div class="form-group">
+                            <div class="col-sm-10 col-sm-offset-1">
+                                <div class="input-group">   
+                                    <span class="input-group-addon text-capitalize">
+                                        
+                                        {{ 'magazine.field.inventoryNumber'|trans }}
+                                    </span>
+                                    {{ form_widget(formSupportingDocument.inventoryNumber,{
+                                    'attr' : { 'disabled':'disabled' } 
+                                    }) }}
+                                    <span class="input-group-addon text-capitalize">
+                                        <input id="inventoryNumber" type="checkbox">
+                                    </span>
+                                </div>
+                            </div>
+                            <div id="inventoryNumber_error"  class="col-sm-10 col-sm-offset-1 text-danger">
+                                
+                            </div>
+                        </div>
+                        <div class="form-group" >
+                            <div class="col-sm-6">
+                                {{ form_widget(formSupportingDocument.family,{
+                                'attr' : { 'style':"width:100% !important" , 'class' :"populate" } 
+                                }) }}
+                            </div>
+                            <div class="col-sm-6">
+                                {{ form_widget(formSupportingDocument.subFamily,{
+                                'attr' : { 'style':"width:100% !important" , 'class' :"populate" } 
+                                }) }}
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-10 col-sm-offset-1">
+                                {{ form_widget(formSupportingDocument.article,{
+                                'attr' : { 'style':"width:100% !important" , 'class' :"populate" } 
+                                }) }}
+                            </div>
+                            <div id="article_error"  class="col-sm-10 col-sm-offset-1 text-danger">
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="col-sm-6">
+                                <div class="input-group">                           
+                                    
+                                    {{ form_widget(formSupportingDocument.price , {
+                                    'attr' : { 'class' : 'form-control' ,
+                                               'placeholder' : 'magazine.field.price'
+                                            }
+                                    }) }}
+                                    <span class="input-group-addon text-capitalize">
+                                        <i id="load" class="ti ti-money"></i> 
+                                        {{ 'magazine.devise'|trans }}
+                                    </span>
+                                </div>
+                                <div id="price_error"  class=" text-danger">
+                                
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-group">                           
+                                    <span class="input-group-addon text-capitalize">
+                                        <i id="load" class="ti ti-archive"></i> 
+                                        {{ 'magazine.field.quantity'|trans }}
+                                    </span>
+                                    {{ form_widget(formSupportingDocument.quantity , {
+                                        'attr' : { 'class' : 'form-control' ,  'placeholder' : 'magazine.field.quantity' }
+                                    }) }}
+                                </div>
+                                <div id="quantity_error"  class=" text-danger">
+                                
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                        {{ form_widget(formSupportingDocument) }}
+                        {{ form_end(formSupportingDocument) }}
+                        
+                        <div class="pull-right">
+                            <button id="new" class="btn btn-primary">
+                            <i class="fa fa-plus"></i>
+                            {{ 'supportingdocument.new.submit'|trans }}
+                            </button>
+                            <button id="edit" class="btn btn-primary">
+                            <i class="ti ti-pencil-alt"></i>
+                            {{ 'supportingdocument.edit.submit'|trans }}
+                            </button>
+                            <button id="annuler" class="btn btn-danger">
+                                <i class="ti ti-back-right"></i>
+                                {{ 'supportingdocument.edit.annuler'|trans }}</button>
+                        </div>
+                        
+                </div>
+                <div id="step2" class="col-md-6" >
+                    <legend>
+                        <h4>
+                            <i class="fa fa-table"></i>
+                             {{ 'supportingdocument.list.name'|trans }}
+                         </h4>
+                         
+                     </legend>
+                    <div class="btn-group">
+                        <a class="btn btn-primary active toggle-vis" data-column="0" style="margin-bottom: 2%;"> {{ 'magazine.field.inventoryNumber'|trans }}
+                        </a>
+                        <a style="margin-bottom: 2%;" class="btn btn-primary toggle-vis" data-column="1" name="options" id="designation"> {{ 'magazine.field.designation'|trans }}
+                        </a>
+                        <a style="margin-bottom: 2%;" class="btn btn-primary toggle-vis" data-column="2" name="options" id="price"> {{ 'magazine.field.price'|trans }}
+                        </a>
+                        <a style="margin-bottom: 2%;" class="btn btn-primary toggle-vis" data-column="3"> {{ 'magazine.field.quantity'|trans }}
+                        </a>
+                        <a style="margin-bottom: 2%;" class="btn btn-primary active  toggle-vis" data-column="4"> {{ 'magazine.field.family'|trans }}
+                        </a>
+                        <a style="margin-bottom: 2%;" class="btn btn-primary active toggle-vis" data-column="5"> {{ 'magazine.field.subFamily'|trans }}
+                        </a>
+                        
+                    </div> 
+                    <hr>
+                    <table id="example" class="table table-responsive table-striped table-bordered " width="100%">
+                        <thead>
+                            <tr>
+                                <th>{{ 'magazine.field.inventoryNumber'|trans }}</th>
+                                <th>{{ 'magazine.field.designation'|trans }}</th>
+                                <th>{{ 'magazine.field.price'|trans }}</th>
+                                <th>{{ 'magazine.field.quantity'|trans }}</th>
+                                <th>{{ 'magazine.field.family'|trans }}</th>
+                                <th>{{ 'magazine.field.subFamily'|trans }}</th>
+                                <th>{{ 'magazine.action'|trans }}</th>
+                            </tr>
+                        </thead>
+                        <tbody id="list">
+                            
+                        </tbody>
+                    </table>
+                    <div id="dialog"></div>
+                </div>
+            </div>
+        <div id="step1" class="col-md-12" >
+            <legend><h4><i class="ti ti-save-alt"></i> {{ form_name }}</h4></legend> 
+            {{ form_start(form ,{'attr' : { 'class' : 'form-horizontal row-border' , 'id' : 'form' } }) }} 
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+    <div class="panel-footer">
+        <div class="pull-right">
+            <button class="btn btn-primary" id="next" >
+                <i class="ti ti-arrow-right"></i>
+            </button>
+            <button class="btn btn-primary" id="prev" >
+                <i class="ti ti-arrow-left"></i>
+            </button>
+            
+            <button class="btn btn-primary " id="submit">
+                <i class="ti ti-save-alt"></i>
+                {{ form_name }}
+            </button>
+            
+        </div>
+    </div>
+</div>

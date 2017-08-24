@@ -1,0 +1,3 @@
+$.fn.dischargeArticle({
+    to: "magazine",
+});

@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+{% block breadcrumbActive %}{{ 'menu.user.profile'|trans }}{% endblock %}
+{% block body %}
+	<!-- BEGIN PROFILE HEADING -->
+	<div class="the-box transparent full no-margin profile-heading">
+		<img src="{{ asset('bundles/isetsomagazine/img/profile.jpg') }}" class="bg-cover" alt="Image">
+		<img src="{{ asset('bundles/isetsomagazine/img/User-file-icon.png') }}" class="avatar" alt="Avatar">
+		<div class="profile-info">
+			<p class="user-name">{{ user.username }}</p>
+			<p class="text-muted">{{ 'profile.show.email'|trans({}, 'FOSUserBundle') }} : {{ user.email }}</p>
+			<p class="right-button">
+			<a href="{{ path('fos_user_profile_edit') }}" class="btn btn-primary btn-sm">{% trans %}menu.user.setting{% endtrans %}</a>
+			</p>
+		</div><!-- /.profile-info -->
+	</div><!-- /.the-box .transparent .profile-heading -->
+	<!-- END PROFILE HEADING -->
+	
+	<div class="panel with-nav-tabs panel-primary panel-square panel-no-border">
+	  <div class="panel-heading">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="#panel-home" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+			<li><a href="#panel-about" data-toggle="tab"><i class="fa fa-user"></i></a></li>
+		</ul>
+	  </div>
+		<div id="panel-collapse-1" class="collapse in">
+			<div class="panel-body">
+				<div class="tab-content">
+					<div class="tab-pane fade in active" id="panel-home">
+						<h4 class="small-heading more-margin-bottom">{{ 'menu.user.history'|trans }}</h4>
+						<hr>
+						<ul class="media-list media-xs">
+							{% for userHistory in userHistory %}
+								<li class="media">
+									<a href="#fakelink" class="pull-left">
+									  <img class="media-object img-circle" src="{{ asset('bundles/isetsomagazine/img/User-icon.png') }}" alt="Avatar">
+									</a>
+									<div class="media-body">
+									  <h4 class="media-heading"><a href="#fakelink">{{ userHistory.action|trans }}</a></h4>
+									  <p class="date"><small>{{userHistory.date|date}}</small></p>
+									  <p class="small">
+									  	{{ userHistory.message|trans }}
+									  </p>
+									</div>
+								 </li>
+							{% endfor %}
+						</ul>
+						<div class="tab-footer fade in active">
+	                    {{ knp_pagination_render(userHistory) }}
+	                	</div>
+					</div>
+					
+					<div class="tab-pane fade" id="panel-about">
+						{% include "FOSUserBundle:Profile:show_content.html.twig" %}
+					</div><!-- /#panel-about -->
+				</div><!-- /.tab-content -->
+			</div><!-- /.panel-body -->
+			
+		</div><!-- /.collapse in -->
+	</div><!-- /.panel .panel-success -->
+						
+						
+{% endblock %}
+{% block javascripts %}
+    {{ parent () }}
+    <script type="text/javascript">
+    var progress = 100 - ( ($('.text-danger').length )* 100 / 4 ) +"%";
+    $("#progress-bar").css("width", progress );
+    $('#profile-progress').text(progress);
+    </script>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block breadcrumb %}
+    <a href="{{ path('typelocal_index') }}">
+       {{ 'typelocal.list.name'|trans }}
+    </a>
+{% endblock %}
+
+{% block breadcrumbActive %}
+    {{ 'typelocal.new.name'|trans }}
+{% endblock %}
+
+{% block body %}
+    {% include 'Template/SingleFormTemplate.html.twig' with {'form': form ,'form_name' : 'typelocal.new.name'|trans ,'submit_name': 'typelocal.new.submit'|trans } %}
+{% endblock %}

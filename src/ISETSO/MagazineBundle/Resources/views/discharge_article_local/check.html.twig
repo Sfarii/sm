@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+{% block breadcrumb %}
+    <a href="{{ path('discharge_article_to_magazine_index') }}">
+       {{ 'dischargearticle.list.name'|trans }}
+    </a>
+{% endblock %}
+     {% block breadcrumbActive %}{{ 'dischargearticle.edit.name'|trans }}{% endblock %}
+{% block body %}
+    {% include 'Template/SingleFormTemplate.html.twig' with {'form': edit_form ,'form_name' : 'orderarticle.edit.name'|trans ,'submit_name': 'orderarticle.edit.submit'|trans } %}
+{% endblock %}

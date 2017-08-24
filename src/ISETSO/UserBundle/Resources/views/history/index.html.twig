@@ -1,0 +1,53 @@
+{% extends "::base.html.twig" %}
+{% block breadcrumbActive %}{{ 'menu.user.history'|trans }}{% endblock %}
+{% block body %}
+	<div data-widget-group="group1">
+		<div class="row">
+			<div class="col-sm-3">
+				{% include "ISETSOUserBundle:Profile:profileMenu.html.twig" %}
+			</div>
+			<div class="col-sm-9">
+				<div class="panel" style="visibility: visible; opacity: 1; display: block; transform: translateY(0px);">
+					<div class="panel-heading">
+						<h2>{{ 'menu.user.history'|trans }}</h2>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-md-12">
+								<ul class="timeline">
+									{% if history|length == 0 %}
+                                		<td colspan="5">
+                                			<i class="ti ti-alert"></i> {{ 'family.list.noResultFound'|trans }} 
+                            
+                                 		</td>
+                            		{% else %}
+                                		{% for userHistory in history %}
+											<li class="timeline-orange">
+												<div class="timeline-icon"><i class="fa fa-bullhorn"></i></div>
+												<div class="timeline-body">
+													<div class="timeline-header">
+														<span class="date">{{userHistory.date|date}}</span>
+
+													</div>
+													<div class="timeline-content">
+														<h4 class="text text-primary text-capitalize">{{ userHistory.action|trans }}</h4>
+														<p>{{ userHistory.message|trans }}</p>
+														
+														
+													</div>
+												</div>
+											</li>
+										{% endfor %}
+									{% endif %}
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="panel-footer">
+                    {{ knp_pagination_render(history) }}
+                	</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

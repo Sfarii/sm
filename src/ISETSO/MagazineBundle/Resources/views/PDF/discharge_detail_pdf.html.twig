@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="description" content="PFE">
+    <meta name="author" content="BelhassenRami">
+
+    {% block stylesheets %}
+        {% stylesheets 
+            'bundles/isetsomagazine/fonts/font-awesome/css/font-awesome.min.css'
+            'bundles/isetsomagazine/fonts/themify-icons/themify-icons.css'
+            'bundles/isetsomagazine/css/styles.css'
+            filter='cssrewrite' %}
+        <link rel="stylesheet" href="{{ app.request.getSchemeAndHttpHost() ~ asset_url }}" />
+        {% endstylesheets %}
+    {% endblock %}
+    <style type="text/css">
+        thead {display: table-header-group;}
+        tr {page-break-inside: avoid;}
+        div{page-break-inside: avoid;}
+    </style>
+</head>
+<body style="background-color: white;">
+    <div class="page-content" >
+        <div class="container-fluid">                 
+            <div class="row mb-xl">
+                <div class="col-md-12" style="padding-top: 5%">
+                    <div class="pull-left">
+                        <h1 class="text-primary text-center" style="font-weight: bold; font-size:12pt; color: black">INSTITUT SUPÉRIEUR<br>DES ÉTUDES TECHNOLOGIQUES<br>SOUSSE
+                        </h1>
+                    </div>
+                    <div class="pull-right">
+                        <img src="{{ app.request.getSchemeAndHttpHost() ~ asset('bundles/isetsomagazine/img/logo-big.png') }}" class="mt-md mb-md" alt="ISETSO">
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-xl">
+                <div class="col-md-12">
+                    <h1 class="text-primary text-center" style="font-weight: bold; color: black">
+                        {{ 'magazine.infoDischarge'|trans }}
+                    </h1>
+                </div>
+            </div>
+            <div class="row mb-xl">
+                <div class="col-md-3">
+                    <div class="panel panel-teal" style="visibility: visible; opacity: 1; display: block; transform: translateY(0px);">
+                        <div class="panel-heading"></div>
+                        <div class="panel-body no-padding">
+                            <table class="table table-striped">
+                                <tbody>
+                                  <tr>
+                                    <th class="text text-primary">{{ 'magazine.field.date'|trans }}</th>
+                                    <td>
+                                        {% if discharge.date %}
+                                            {{ discharge.date|date('Y/m/d') }}
+                                        {% endif %}
+                                    </td>
+                                  </tr>
+                                  
+                                  <tr>
+                                    <th class="text text-primary">{{ 'magazine.field.observation'|trans }}</th>
+                                    <td>{{ discharge.observation }}</td>
+                                  </tr>
+                                  <tr>
+                                    <th class="text text-primary">
+                                        {% if discharge.toLocal is defined %}
+                                            {{ 'magazine.field.local'|trans }}
+                                        {% elseif discharge.toMagazine is defined %}
+                                            {{ 'magazine.field.tomagazin'|trans }}                   
+                                        {% else %}
+                                            {{ 'magazine.field.toUser'|trans }}
+                                        {% endif %}  
+                                    </th>
+                                    <td>
+                                        {% if discharge.toLocal is defined %}
+                                            {{ discharge.toLocal.designation }}
+                                        {% elseif discharge.toMagazine is defined %}
+                                            {{ discharge.toMagazine.designation }}  
+                                        {% else %}
+                                            {{ discharge.toUser.username }}
+                                        {% endif %}
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <th class="text text-primary">
+                                        {{ 'magazine.field.etat'|trans }}
+                                    </th>
+                                    <td>
+                                        {% if discharge.etat == "a" %}
+                                            {{ 'magazine.etatOption.accept'|trans }}
+                                        {% elseif discharge.etat == "r" %}
+                                            {{ 'magazine.etatOption.refuse'|trans }}                   
+                                        {% elseif discharge.etat == "w" %}
+                                            {{ 'magazine.etatOption.wait'|trans }}
+                                        {% else %}
+                                            {{ 'magazine.etat'|trans }}
+                                        {% endif %} 
+                                    </td>
+                                  </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-info" style="visibility: visible; opacity: 1; display: block; transform: translateY(0px);">
+                        <div class="panel-heading">{{ 'magazine.field.userName'|trans }}</div>
+                        <div class="panel-body no-padding">
+                            <table class="table table-striped">
+                                <tbody>
+                                    <tr>
+                                    <th class="text text-primary">{{ 'magazine.field.firstName'|trans }}</th>
+                                    <td>
+                                        {% if discharge.user.firstName == null%}
+                                            <div class="text text-capitalize text-danger"> {{  'user.noInfo'|trans }} </div>
+                                        {% else %}
+                                            {{ discharge.user.firstName }}
+                                        {% endif %}
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <th class="text text-primary">{{ 'magazine.field.lastName'|trans }}</th>
+                                    <td>
+                                        {% if discharge.user.lastName == null%}
+                                            <div class="text text-capitalize text-danger"> {{  'user.noInfo'|trans }} </div>
+                                        {% else %}
+                                            {{ discharge.user.lastName }}
+                                        {% endif %}
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <th class="text text-primary">{{ 'profile.show.username'|trans({}, 'FOSUserBundle') }}</th>
+                                    <td>{{ discharge.user.username }}</td>
+                                  </tr>
+                                  <tr>
+                                    <th class="text text-primary">{{ 'profile.show.email'|trans({}, 'FOSUserBundle') }}</th>
+                                    <td>{{ discharge.user.email }}</td>
+                                  </tr>
+                              
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-info">
+                <div class="panel-heading"> {{ 'supportingdocument.list.name'|trans }}</div>
+                <div class="panel-body no-padding">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr class="info">
+                                <th class="text text-primary">{{ 'magazine.field.id'|trans }}</th>
+                                <th class="text text-primary">{{ 'magazine.field.designation'|trans }}</th>
+                                <th class="text text-primary">{{ 'magazine.field.quantity'|trans }}</th>
+                                <th class="text text-primary">{{ 'magazine.field.unit'|trans }}</th>
+                                <th class="text text-primary">{{ 'magazine.field.family'|trans }}</th>
+                                <th class="text text-primary">{{ 'magazine.field.subFamily'|trans }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            {% for detail in discharge.detail %}
+                                <tr>
+                                    <td>{{ detail.supportingDocument.inventoryNumber }}</td>
+                                    <td>{{ detail.supportingDocument.article.designation }}</td>
+                                    <td>{{ detail.quantity }}</td>
+                                    <td>{{ detail.supportingDocument.article.unit.designation }}</td>
+                                    <td>{{ detail.supportingDocument.article.subFamily.designation }}</td>
+                                    <td>{{ detail.supportingDocument.article.subFamily.family.designation }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <table cellspacing="0" width="100%">
+                <tbody>
+                    <tr>
+                        <td class="text-primary text-center pull-left"> signature du bénéficiaire </td>
+                        <td class="text-primary text-center pull-right"> signature du facteur </td>
+                    </tr>
+                    <tr>
+                        <td class="text-primary pull-left text-center">.</td>
+                        <td class="text-primary  pull-right text-center">.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div> <!-- .container-fluid -->
+    </div> <!-- #page-content --> 
+    
+</body>
+</html>

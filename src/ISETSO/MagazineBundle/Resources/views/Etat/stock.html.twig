@@ -1,0 +1,175 @@
+{% extends "::base.html.twig" %}
+{% block breadcrumbActive %}{{ 'supportingdocument.list.name'|trans }}{% endblock %}
+{% block body %}
+
+<div data-widget-group="group1">
+    <div class="row">
+            <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2><i class="fa fa-list"></i> {{ 'supportingdocument.list.name'|trans }}</h2>
+                    <div class="panel-ctrls">
+                        <div id="example_filter" class="dataTables_filter pull-right">
+                             {{ form_start(form ,{
+                                'attr' : { 'class' : 'form-inline' } 
+                                
+                            }) }}
+
+                                <div class="input-group">
+                                     {{ form_widget(form.search,{
+                                        'attr' : {
+                                            'class' : 'form-control ' ,
+                                            'placeholder' : 'family.list.search'|trans
+                                        } 
+                                        
+                                    }) }}
+                                </div>
+                                <div class="input-group btn-group">
+                                    <button type="submit" class="btn btn-primary-alt"><i class="ti ti-search"></i></button>
+                                    <button name="print" value="true" {{ padding|length == 0 ? 'disabled = "true"' : ""}} class="btn btn-warning-alt">
+                                    <i class="ti ti-printer"></i>
+                                    </button>
+                                </div>
+                             {{ form_end(form) }}
+                        </div>
+                        <i class="separator"></i>
+                        <div class="panel-heading pull-left">
+                            <label class="panel-ctrls-center">
+                               {{ padding.getTotalItemCount }}
+                               {{ 'article.list.resultFound'|trans }}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body no-padding">
+                    <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                    <th class="text text-capitalize">
+                                        {{ knp_pagination_sortable(padding, "#" , 'id_article') }}
+                                        {% if padding.isSorted('id_article') %}
+                                            
+                                            {% if  padding.direction == 'asc' %}
+                                                <span class='ti ti-angle-up pull-right'></span>
+                                            {% else %}
+                                                <span class='ti ti-angle-down pull-right'></span>
+                                            {% endif %}
+                                        {% else %}
+                                            <i class='ti ti-more pull-right'></i>
+                                        {% endif %}
+                                    </th>
+                                    <th class="text text-capitalize">
+                                        {{ knp_pagination_sortable(padding, 'magazine.field.article'|trans , 'article_name') }}
+                                        {% if padding.isSorted('article_name') %}
+                                            
+                                            {% if  padding.direction == 'asc' %}
+                                                <span class='ti ti-angle-up pull-right'></span>
+                                            {% else %}
+                                                <span class='ti ti-angle-down pull-right'></span>
+                                            {% endif %}
+                                        {% else %}
+                                            <i class='ti ti-more pull-right'></i>
+                                        {% endif %}
+                                    </th>
+                                    <th class="text text-capitalize">
+                                        {{ knp_pagination_sortable(padding, 'magazine.field.price'|trans , 'price') }}
+                                        {% if padding.isSorted('price') %}
+                                            
+                                            {% if  padding.direction == 'asc' %}
+                                                <span class='ti ti-angle-up pull-right'></span>
+                                            {% else %}
+                                                <span class='ti ti-angle-down pull-right'></span>
+                                            {% endif %}
+                                        {% else %}
+                                            <i class='ti ti-more pull-right'></i>
+                                        {% endif %}
+                                    </th>
+                                    <th class="text text-capitalize">
+                                        {{ knp_pagination_sortable(padding, 'magazine.field.input'|trans , 'qte') }}
+                                        {% if padding.isSorted('qte') %}
+                                            
+                                            {% if  padding.direction == 'asc' %}
+                                                <span class='ti ti-angle-up pull-right'></span>
+                                            {% else %}
+                                                <span class='ti ti-angle-down pull-right'></span>
+                                            {% endif %}
+                                        {% else %}
+                                            <i class='ti ti-more pull-right'></i>
+                                        {% endif %}
+                                    </th> 
+                                    <th class="text text-capitalize">
+                                        {{ knp_pagination_sortable(padding, 'magazine.field.discharge'|trans , 'discharge') }}
+                                        {% if padding.isSorted('discharge') %}
+                                            
+                                            {% if  padding.direction == 'asc' %}
+                                                <span class='ti ti-angle-up pull-right'></span>
+                                            {% else %}
+                                                <span class='ti ti-angle-down pull-right'></span>
+                                            {% endif %}
+                                        {% else %}
+                                            <i class='ti ti-more pull-right'></i>
+                                        {% endif %}
+                                    </th> 
+                                    <th class="text text-capitalize">
+                                        {{ knp_pagination_sortable(padding, 'magazine.field.return'|trans , 'returned') }}
+                                        {% if padding.isSorted('returned') %}
+                                            
+                                            {% if  padding.direction == 'asc' %}
+                                                <span class='ti ti-angle-up pull-right'></span>
+                                            {% else %}
+                                                <span class='ti ti-angle-down pull-right'></span>
+                                            {% endif %}
+                                        {% else %}
+                                            <i class='ti ti-more pull-right'></i>
+                                        {% endif %}
+                                    </th> 
+                                    <th class="text text-capitalize">
+                                        {{ knp_pagination_sortable(padding, 'magazine.field.unit'|trans , 'unit') }}
+                                        {% if padding.isSorted('unit') %}
+                                            
+                                            {% if  padding.direction == 'asc' %}
+                                                <span class='ti ti-angle-up pull-right'></span>
+                                            {% else %}
+                                                <span class='ti ti-angle-down pull-right'></span>
+                                            {% endif %}
+                                        {% else %}
+                                            <i class='ti ti-more pull-right'></i>
+                                        {% endif %}
+                                    </th>
+                                    <th>{{ 'magazine.field.stock'|trans }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                             {% if padding|length == 0 %} 
+                                <td  class="text text-capitalize text-danger text-center animated fadeInUp" colspan="7">
+                                    <i class="fa fa-exclamation-triangle"></i>
+                                    {{ 'supportingdocument.list.noResultFound'|trans }}
+                                    </p>
+                                 </td>
+                                  
+                                {% else %}
+                                
+                                {% for stock in padding %}
+                                    <tr>
+                                        <td>{{ stock.id_article }}</td>
+                                        <td>{{ stock.article_name }}</td>
+                                        <td>{{ stock.price }}</td>
+                                        <td>{{ stock.qte }}</td>
+                                        <td>{{ stock.discharge }}</td>
+                                        <td>{{ stock.returned }}</td>
+                                        <td>{{ stock.unit }}</td>
+                                        <td>{{ (stock.returned + stock.qte) - stock.discharge }}</td>
+                                    </tr>
+                                {% endfor %}
+                            {% endif %}
+                         </tbody>
+                    </table>
+                </div>
+                <div class="panel-footer">
+                    {{ knp_pagination_render(padding) }}
+                </div>
+            </div></div>
+        </div>
+    </div>
+</div>
+{% endblock %}

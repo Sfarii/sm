@@ -1,0 +1,268 @@
+<div class="static-sidebar-wrapper sidebar-default animated fadeInLeft">
+    <div class="static-sidebar" style="top: 56px;">
+        <div class="sidebar">
+            <div class="widget">
+                <div class="widget-body">
+                    <div class="userinfo">
+                        <div class="avatar">
+                            <span class="icon-bg"><i class="ti ti-user fa-stack-2x"></i></span>
+                        </div>
+                        <div class="info">
+                            <span class="username">{{ app.user.username }}</span>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="widget stay-on-collapse" id="widget-sidebar">
+                <nav role="navigation" class="widget-body">
+                    <ul class="acc-menu">
+                        <li>
+                            <a href="{{ url ('dashboard_index') }}"><i class="ti ti-home"></i><span>{% trans %}menu.dashbord{% endtrans %}</span></a>
+                        </li>
+                        <li>
+                            <a href="{{ url ('Inventory_index') }}">
+                                <i class="ti ti-search"></i>
+                                <span>{% trans %}menu.inventary{% endtrans %}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path ('stock_index')}}">
+                                <i class="ti ti-briefcase"></i> 
+                                {% trans %}menu.stock{% endtrans %}
+                            </a>
+                        </li>
+
+                        {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_GESTION_ARTICLE') or is_granted('ROLE_GESTION_UNIT') %}
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="ti ti-book"></i>
+                                    <span>{% trans %}menu.dropDownArticle.name{% endtrans %}</span>
+                                </a>
+                                <ul class="acc-menu">
+                                    {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_GESTION_ARTICLE') %}
+                                        <li>
+                                            <a href="{{ path('articleconsumable_index') }}">
+                                                {% trans %}menu.dropDownArticle.consumable{% endtrans %}
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ path('articledurable_index') }}">
+                                                {% trans %}menu.dropDownArticle.durable{% endtrans %}
+                                            </a>
+                                        </li>
+                                    {% endif %}
+
+                                    {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_GESTION_UNIT') %}
+                                        <li>
+                                            <a href="{{ path('unit_index') }}">
+                                                {% trans %}menu.dropDownArticle.unit{% endtrans %}
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </li>
+                        {% endif %}
+
+                        {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_GESTION_FAMILY') or is_granted('ROLE_GESTION_SUBFAMILY') %}
+
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="ti ti-layers-alt"></i>
+                                    <span>{% trans %}menu.dropDownFamily.name{% endtrans %}</span>
+                                </a>
+                                <ul class="acc-menu">
+                                    {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_GESTION_FAMILY') %}
+                                        <li>
+                                            <a href="{{ path('familyconsumable_index') }}">
+                                                {% trans %}menu.dropDownArticle.consumable{% endtrans %}
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                    {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_GESTION_SUBFAMILY') %}
+                                        <li>
+                                            <a href="{{ path('familydurable_index') }}">
+                                                {% trans %}menu.dropDownArticle.durable{% endtrans %}
+                                            </a>
+                                        </li> 
+                                    {% endif %}  
+                                </ul>
+                            </li>
+                        {% endif %}
+                        {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_GESTION_JOURNAL') or is_granted('ROLE_GESTION_ORIGIN') %}
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="ti ti-archive"></i>
+                                    <span>{% trans %}menu.dropDownJournal.name{% endtrans %}</span>
+                                </a>
+                                <ul class="acc-menu">
+                                    {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_GESTION_JOURNAL') %}
+                                        <li>
+                                            <a  href="{{ path ('journalconsumable_index')}}">
+                                                {% trans %}menu.dropDownJournal.consumable{% endtrans %}
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ path ('journaldurable_index')}}">
+                                                {% trans %}menu.dropDownJournal.durable{% endtrans %}
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                    {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_GESTION_ORIGIN') %}
+                                        <li>
+                                            <a href="{{ path('origin_index') }}">
+                                                {% trans %}menu.dropDownJournal.origin{% endtrans %}
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </li>
+                        {% endif %}
+                        {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_GESTION_ORDER') or is_granted('ROLE_GESTION_RETURN_TO_CENTRAL_STORE') or is_granted('ROLE_GESTION_RETURN_TO_SUB_STORE') or is_granted('ROLE_GESTION_DISCHARGE_TO_USER') or is_granted('ROLE_GESTION_DISCHARGE_TO_MAGAZINE') %}
+
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="ti ti-agenda"></i>
+                                    <span>{% trans %}menu.dropDownSupportingDocument.name{% endtrans %}</span>
+                                </a>
+                                <ul class="acc-menu">
+                                    {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_GESTION_ORDER') %}
+                                        <li>
+                                            <a href="{{ path ('orderarticle_index')}}">
+                                                {% trans %}menu.dropDownSupportingDocument.order{% endtrans %}
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                    {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_GESTION_RETURN_TO_CENTRAL_STORE') %}
+                                        <li>
+                                            <a href="{{ path ('returnArticle_centralStore_index')}}">
+                                                {% trans %}menu.dropDownSupportingDocument.return{% endtrans %}
+                                            </a>
+                                            
+                                        </li>
+                                    {% endif %}
+                                    {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_GESTION_DISCHARGE_TO_USER') or is_granted('ROLE_GESTION_DISCHARGE_TO_MAGAZINE') or is_granted('ROLE_GESTION_DISCHARGE_TO_LOCAL') %}
+                                        <li>
+                                            <a href="javascript:;">
+                                                <span> {% trans %}menu.dropDownSupportingDocument.discharge{% endtrans %}</span>
+                                            </a>
+                                            <ul class="acc-menu">
+                                                
+                                                {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_GESTION_DISCHARGE_TO_MAGAZINE') %}
+                                                    <li>
+                                                        <a href="{{ path ('discharge_article_to_magazine_index')}}">
+                                                            {% trans %}menu.dropDownSupportingDocument.dischargeToMagazine{% endtrans %}
+                                                        </a>
+                                                    </li>
+                                                {% endif %}
+                                                {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_GESTION_DISCHARGE_TO_USER') %}
+                                                    <li>
+                                                        <a href="{{ path ('discharge_article_to_user_index')}}">
+                                                            {% trans %}menu.dropDownSupportingDocument.dischargeToUser{% endtrans %}
+                                                        </a>
+                                                    </li>
+                                                {% endif %}
+                                                {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_GESTION_DISCHARGE_TO_LOCAL') %}
+                                                    <li>
+                                                        <a href="{{ path ('discharge_article_to_local_index')}}">
+                                                            {% trans %}menu.dropDownSupportingDocument.dischargeToLocal{% endtrans %}
+                                                        </a>
+                                                    </li>
+                                                {% endif %}
+                                            </ul>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </li>
+                        {% endif %}
+                        {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_GESTION_LOCAL') or is_granted('ROLE_GESTION_TYPE_LOCAL') %}
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="fa fa-building-o"></i>
+                                    <span>{% trans %}menu.dropDownLocal.name{% endtrans %}</span>
+                                </a>
+                                <ul class="acc-menu">
+                                    
+                                    {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_GESTION_LOCAL') %}
+                                        <li>
+                                            <a href="{{ path ('local_index')}}">
+                                                {% trans %}menu.dropDownLocal.local{% endtrans %}
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                    {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_GESTION_TYPE_LOCAL') %}
+                                        <li>
+                                            <a href="{{ path ('typelocal_index')}}">
+                                                {% trans %}menu.dropDownLocal.typeLocal{% endtrans %}
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </li>
+                        {% endif %}
+                        {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_GESTION_PROVIDER') or is_granted('ROLE_GESTION_ACTIVITY_DOMAIN') %}
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="ti ti-truck"></i>
+                                    <span>{% trans %}menu.dropDownProvider.name{% endtrans %}</span>
+                                </a>
+                                <ul class="acc-menu">
+                                    
+                                    {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_GESTION_PROVIDER') %}
+                                        <li>
+                                            <a href="{{ path ('provider_index')}}">
+                                                {% trans %}menu.dropDownProvider.provider{% endtrans %}
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                    {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_GESTION_ACTIVITY_DOMAIN') %}
+                                        <li>
+                                            <a href="{{ path ('activitydomain_index')}}">
+                                                {% trans %}menu.dropDownProvider.activitySector{% endtrans %}
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </li>
+                        {% endif %}
+                        
+                        
+                        {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_GESTION_USER') or is_granted('ROLE_GESTION_GROUP') %}
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="ti ti-user"></i>
+                                    <span>{% trans %}menu.dropDownUser.name{% endtrans %}</span>
+                                </a>
+                                <ul class="acc-menu">
+
+                                    {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_GESTION_USER') %}
+                                        <li>
+                                            <a href="{{ path ('user_index')}}">
+                                                {% trans %}menu.dropDownUser.user{% endtrans %}
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                    {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_GESTION_GROUP') %}
+                                        <li>
+                                            <a href="{{ path ('usergroup_index')}}">
+                                                {% trans %}menu.dropDownUser.group{% endtrans %}
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </li>
+                        {% endif %} 
+                        {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_GESTION_MAGAZINE') %}
+                            <li>
+                                <a href="{{ path ('magazine_index')}}">
+                                    <i class="ti ti-clipboard"></i> 
+                                    {% trans %}menu.magazine.magazine{% endtrans %}
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets 
+        'bundles/isetsomagazine/plugins/form-multiselect/css/multi-select.css'
+        'bundles/isetsomagazine/plugins/form-select2/select2.css'
+        filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}     
+{% endblock %}
+{% block breadcrumb %}
+    <a href="{{ path('usergroup_index') }}">
+       {{ 'usergroup.list.name'|trans }}
+    </a>
+{% endblock %}
+	 {% block breadcrumbActive %}{{ 'usergroup.edit.name'|trans }}{% endblock %}
+{% block body %}
+    <ul id="basicwizard-header" class="stepy-header">
+        <li id="basicwizard-head-0">
+            <a href="{{ url('userGroup_permission', { 'id': userGroup.id}) }}">
+                <div><i class="fa fa-cogs"></i></div>
+                <span>{{ 'usergroup.edit.permission'|trans }}</span>
+            </a>
+        </li>
+        <li id="basicwizard-head-1" class="stepy-active">
+            <a href="{{ url('user_edit', { 'id': userGroup.id}) }}">
+                <div><i class="fa fa-refresh fa-spin"></i></div>
+                <span>{{ 'usergroup.edit.name'|trans }}</span>
+            </a>
+        </li>
+    </ul>
+    {% include 'Template/SingleFormTemplate.html.twig' with {'form': edit_form ,'form_name' : 'usergroup.edit.name'|trans ,'submit_name': 'usergroup.edit.submit'|trans } %}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts filter='?yui_js'
+        'bundles/isetsomagazine/plugins/form-multiselect/js/jquery.multi-select.min.js'
+        'bundles/isetsomagazine/plugins/iCheck/icheck.js'
+        'bundles/isetsomagazine/plugins/form-select2/select2.min.js'
+    %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <script type="text/javascript">
+        $('select').multiSelect();
+    </script>
+{% endblock %}

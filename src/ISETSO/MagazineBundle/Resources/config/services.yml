@@ -1,0 +1,7 @@
+services:
+  magazine.entity_manager:
+    class: ISETSO\MagazineBundle\Services\MagazineEntityManager
+    arguments: ["@doctrine.orm.entity_Manager","@knp_paginator","@security.authorization_checker","@magazine.journal_manager","@knp_snappy.pdf" , "@templating"]
+  magazine.journal_manager:
+    class: ISETSO\MagazineBundle\Services\JournalManager
+    arguments: ["@doctrine.orm.entity_Manager"]

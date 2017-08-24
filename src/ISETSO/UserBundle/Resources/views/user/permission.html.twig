@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets 
+        'bundles/isetsomagazine/plugins/form-multiselect/css/multi-select.css'
+        'bundles/isetsomagazine/plugins/form-select2/select2.css'
+        filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}     
+{% endblock %}
+{% block breadcrumb %}
+    <a href="{{ path('user_index') }}">
+       {{ 'user.list.name'|trans }}
+    </a>
+{% endblock %}
+{% block breadcrumbActive %}
+    {{ 'user.edit.name'|trans }}
+{% endblock %}
+{% block body %}
+    <ul id="basicwizard-header" class="stepy-header">
+        <li id="basicwizard-head-0" class="stepy-active">
+            <a href="{{ url('user_permission', { 'id': user.id}) }}">
+                <div><i class="fa fa-refresh fa-spin"></i></div>
+                <span>{{ 'user.edit.permission'|trans }}</span>
+            </a>
+        </li>
+        <li id="basicwizard-head-1">
+            <a href="{{ url('user_edit', { 'id': user.id}) }}">
+                <div><i class="fa fa-cogs"></i></div>
+                <span>{{ 'user.edit.name'|trans }}</span>
+            </a>
+        </li>
+    </ul>
+    {% include 'Template/SingleFormTemplate.html.twig' with {'form': form ,'form_name' : 'user.edit.name'|trans ,'submit_name': 'user.edit.submit'|trans } %}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts filter='?yui_js'
+        'bundles/isetsomagazine/plugins/form-multiselect/js/jquery.multi-select.min.js'
+        'bundles/isetsomagazine/plugins/iCheck/icheck.js'
+        'bundles/isetsomagazine/plugins/form-select2/select2.min.js'
+    %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <script type="text/javascript">
+        $('select').multiSelect();
+    </script>
+{% endblock %}

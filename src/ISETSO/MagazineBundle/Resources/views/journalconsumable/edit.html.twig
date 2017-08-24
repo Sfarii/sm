@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets 
+        'bundles/isetsomagazine/plugins/datatables/dataTables.bootstrap.css'
+        'bundles/isetsomagazine/plugins/datatables/dataTables.themify.css'
+        'bundles/isetsomagazine/plugins/form-select2/select2.css'
+        'bundles/isetsomagazine/css/cssload-finger.css'
+        filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+    
+{% endblock %}
+{% block breadcrumb %}
+    <a href="{{ path('journalconsumable_index') }}">
+       {{ 'journalconsumable.list.name'|trans }}
+    </a>
+{% endblock %}
+	 {% block breadcrumbActive %}{{ 'journalconsumable.edit.name'|trans }}{% endblock %}
+{% block body %}
+    {% include 'Template/JournalAddFormTemplate.html.twig' with {'form_name': 'journalconsumable.edit.name'|trans } %}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts filter='?yui_js'
+        'bundles/isetsomagazine/plugins/datatables/jquery.dataTables.js'
+        'bundles/isetsomagazine/plugins/datatables/dataTables.bootstrap.js'
+        'bundles/isetsomagazine/myjs/datatables.js'
+        'bundles/isetsomagazine/plugins/form-select2/select2.min.js'
+        'bundles/isetsomagazine/plugins/form-daterangepicker/moment.min.js'
+        'bundles/isetsomagazine/plugins/bootstrap-datepicker/bootstrap-datepicker.js'
+        'bundles/isetsomagazine/myjs/date.js'
+        'bundles/isetsomagazine/myPlugins/Supporting-Document-edit.js'
+        'bundles/isetsomagazine/myjs/edit_journal_consumable.js'
+
+    %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+ {% endblock %}
+  

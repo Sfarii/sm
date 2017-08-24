@@ -1,0 +1,259 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h2><i class="ti ti-save-alt"></i> {{ form_name }}</h2>
+    </div>
+    <div class="panel-body">
+        <ul id="basicwizard-header" class="stepy-header">
+            <li id="basicwizard-head-0"  class="stepy-active" style="cursor: default;">
+                <a href="#">
+                    <div>{{ 'form.firstStep'|trans }}</div>
+                    <span>{{ 'detail.new.name'|trans }}</span>
+                </a>
+            </li>
+            <li id="basicwizard-head-1"  style="cursor: default;">
+                <a href="#">
+                    <div>{{ 'form.secondStep'|trans }}</div>
+                    <span>{{ form_name }}</span>
+                </a>
+            </li>
+        </ul>
+        <div id="step2" class="col-md-12" style="visibility: hidden;display: none;">
+            <div class="col-md-6">
+                <legend><h4><i class="ti ti-save-alt"></i> {{ 'detail.new.name'|trans }}</h4></legend>
+                <div class="tab-container tab-primary">
+                    <ul class="nav nav-tabs"><li class="dropdown pull-right tabdrop hide"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-angle-down"></i> </a><ul class="dropdown-menu"></ul></li>
+                        <li class="active"><a href="#durable" data-toggle="tab" aria-expanded="true"><i class="ti ti-save-alt"></i> {{ 'menu.dropDownArticle.durable'|trans }}</a></li>
+                        <li class="pull-right"><a href="#consumable" data-toggle="tab" aria-expanded="false"><i class="ti ti-save-alt"></i> {{ 'menu.dropDownArticle.consumable'|trans }}</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="durable">
+                            {{ form_start(detailDurable,{
+                                'attr' : { 'class' : 'form-horizontal row-border' , 'id' : 'validate-form'} 
+                            }) }}
+                            
+                                <div class="form-group" >
+                                    <div class="col-sm-6">
+                                        {{ form_widget(detailDurable.family,{
+                                        'attr' : { 'style':"width:100% !important" , 'class' :"populate" } 
+                                        }) }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        {{ form_widget(detailDurable.subFamily,{
+                                        'attr' : { 'style':"width:100% !important" , 'class' :"populate" } 
+                                        }) }}
+                                    </div>
+                                    
+                                    
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-10 col-sm-offset-1">
+                                        {{ form_widget(detailDurable.article,{
+                                        'attr' : { 'style':"width:100% !important" , 'class' :"populate" } 
+                                        }) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-10 col-sm-offset-1">
+                                        <div class="input-group">                           
+                                            <span class="input-group-addon text-capitalize">
+                                                <i id="load" class="fa fa-chain"></i>
+                                            </span>
+                                            {{ form_widget(detailDurable.supportingDocument,{
+                                            'attr' : { 'style':"width:100% !important" , 'class' :"populate" } 
+                                            }) }}
+                                        </div>
+                                    </div>
+                                    <div id="supportingDocumentDurable_error"  class="col-sm-10 col-sm-offset-1 text-danger">
+                                        
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-6">
+                                        <div class="input-group">                           
+                                            <span class="input-group-addon text-capitalize">
+                                                <i id="load" class="ti ti-archive"></i> 
+                                                {{ 'magazine.field.quantity'|trans }}
+                                            </span>
+                                            {{ form_widget(detailDurable.quantity , {
+                                                'attr' : { 'class' : 'form-control' ,  'placeholder' : 'magazine.field.quantity' }
+                                            }) }}
+                                        </div>
+                                        <div id="quantityDurable_error"  class=" text-danger">
+                                        
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="input-group">                           
+                                            <span class="input-group-addon">
+                                            <i id="load" class="fa fa-spinner"></i> 
+                                            {{ 'search.stock'|trans }}
+                                            </span>
+                                            <input id="stockDurable"  readonly  type="text" class="form-control" placeholder="{{ 'search.stock'|trans }}">
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                           
+                            {{ form_widget(detailDurable) }}
+
+                            {{ form_end(detailDurable) }}
+                            <div class="form-group">
+                                <div class="pull-right">
+                                    <button id="newDurable" class="btn btn-primary">
+                                    <i class="fa fa-plus"></i>
+                                    {{ 'detail.new.submit'|trans }}
+                                    </button>
+                                    
+                                    <button id="annuler" class="btn btn-danger">
+                                        <i class="ti ti-back-right"></i>
+                                        {{ 'detail.edit.annuler'|trans }}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="consumable">
+                            {{ form_start(detailConsumable,{
+                                'attr' : { 'class' : 'form-horizontal row-border' , 'id' : 'validate-form'} 
+                            }) }}
+                            
+                                <div class="form-group" >
+                                    <div class="col-sm-6">
+                                        {{ form_widget(detailConsumable.family,{
+                                        'attr' : { 'style':"width:100% !important" , 'class' :"populate" } 
+                                        }) }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        {{ form_widget(detailConsumable.subFamily,{
+                                        'attr' : { 'style':"width:100% !important" , 'class' :"populate" } 
+                                        }) }}
+                                    </div>
+                                    
+                                    
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-10 col-sm-offset-1">
+                                        {{ form_widget(detailConsumable.article,{
+                                        'attr' : { 'style':"width:100% !important" , 'class' :"populate" } 
+                                        }) }}
+                                    </div>
+                                    
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-10 col-sm-offset-1">
+                                        
+                                            {{ form_widget(detailConsumable.supportingDocument,{
+                                            'attr' : { 'style':"width:100% !important" , 'class' :"populate" } 
+                                            }) }}
+                                    </div>
+                                    <div id="supportingDocumentConsumable_error"  class="col-sm-10 col-sm-offset-1 text-danger">
+                                        
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-6">
+                                        <div class="input-group">                           
+                                            <span class="input-group-addon text-capitalize">
+                                                <i id="load" class="ti ti-archive"></i> 
+                                                {{ 'magazine.field.quantity'|trans }}
+                                            </span>
+                                            {{ form_widget(detailConsumable.quantity , {
+                                                'attr' : { 'class' : 'form-control' ,  'placeholder' : 'magazine.field.quantity' }
+                                            }) }}
+                                        </div>
+                                        <div id="quantityConsumable_error"  class=" text-danger">
+                                        
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="input-group">                           
+                                            <span class="input-group-addon">
+                                            <i id="load" class="fa fa-spinner"></i> 
+                                            {{ 'search.stock'|trans }}
+                                            </span>
+                                            <input id="stock" readonly type="text" class="form-control" placeholder="{{ 'search.stock'|trans }}">
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                           
+                            {{ form_widget(detailConsumable) }}
+
+                            {{ form_end(detailConsumable) }}
+                            <div class="form-group">
+                                <div class="pull-right">
+                                    <button id="newConsumable" class="btn btn-primary">
+                                    <i class="fa fa-plus"></i>
+                                    {{ 'detail.new.submit'|trans }}
+                                    </button>
+                                    <button id="editConsumable" class="btn btn-primary">
+                                    <i class="ti ti-pencil-alt"></i>
+                                    {{ 'detail.edit.submit'|trans }}
+                                    </button>
+                                    <button id="annuler" class="btn btn-danger">
+                                        <i class="ti ti-back-right"></i>
+                                        {{ 'detail.edit.annuler'|trans }}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6" style="border-left: 1px solid black;">
+                <legend><h4><i class="fa fa-table"></i> {{ 'detail.list.name'|trans }}</h4></legend>
+                <div class="btn-group">
+                        <a class="btn btn-primary active toggle-vis" data-column="0" style="margin-bottom: 2%;"> {{ 'magazine.field.inventoryNumber'|trans }}
+                        </a>
+                        <a style="margin-bottom: 2%;" class="btn btn-primary toggle-vis" data-column="1" name="options" id="designation"> {{ 'magazine.field.designation'|trans }}
+                        </a>
+                        <a style="margin-bottom: 2%;" class="btn btn-primary toggle-vis" data-column="2"> {{ 'magazine.field.quantity'|trans }}
+                        </a>
+                        <a style="margin-bottom: 2%;" class="btn btn-primary active  toggle-vis" data-column="3"> {{ 'magazine.field.family'|trans }}
+                        </a>
+                        <a style="margin-bottom: 2%;" class="btn btn-primary active toggle-vis" data-column="4"> {{ 'magazine.field.subFamily'|trans }}
+                        </a>
+                        
+                    </div> 
+                    <hr>
+                <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>{{ 'magazine.field.inventoryNumber'|trans }}</th>
+                            <th>{{ 'magazine.field.designation'|trans }}</th>
+                            <th>{{ 'magazine.field.quantity'|trans }}</th>
+                            <th>{{ 'magazine.field.family'|trans }}</th>
+                            <th>{{ 'magazine.field.subFamily'|trans }}</th>
+                            <th>{{ 'magazine.action'|trans }}</th>
+                        </tr>
+                    </thead>
+                    <tbody id="list">
+                        
+                    </tbody>
+                </table>
+                <div id="dialog"></div>
+            </div>
+        </div>
+        <div id="step1" class="col-md-12" >
+            <legend><h4><i class="ti ti-save-alt"></i> {{ form_name }}</h4></legend> 
+            {{ form_start(form ,{'attr' : { 'class' : 'form-horizontal row-border' , 'id' : 'form' } }) }} 
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+    <div class="panel-footer">
+        <div class="pull-right">
+            <button class="btn btn-primary" id="next" >
+                <i class="ti ti-arrow-right"></i>
+            </button>
+            <button class="btn btn-primary" id="prev" >
+                <i class="ti ti-arrow-left"></i>
+            </button>
+            
+            <button class="btn btn-primary " id="submit">
+                <i class="ti ti-save-alt"></i>
+                {{ form_name }}
+            </button>
+            
+        </div>
+    </div>
+</div>

@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+{% block breadcrumb %}
+    <a href="{{ path('user_index') }}">
+       {{ 'user.list.name'|trans }}
+    </a>
+{% endblock %}
+   {% block breadcrumbActive %}{{ 'user.show.name'|trans }}{% endblock %}
+{% block body %}
+    <div data-widget-group="group1">
+      <div class="tab-content">
+        <div class="tab-pane active" id="tab-about">
+        <div class="panel panel-default" style="visibility: visible; opacity: 1; display: block; transform: translateY(0px);">
+            <div class="panel-heading">
+                <h2>{{ 'menu.user.profile'|trans  }}</h2>
+            </div>
+            <div class="panel-body">
+                <div class="about-area">
+                    <div class="table-responsive">
+                      <table class="table">
+                        <tbody>
+                          <tr>
+                            <th  class="text text-capitalize text-primary">{{ 'profile.show.username'|trans({}, 'FOSUserBundle') }}</th>
+                            <td>{{ user.username }}</td>
+                          </tr>
+                          <tr>
+                            <th class="text text-capitalize text-primary">{{ 'profile.show.email'|trans({}, 'FOSUserBundle') }}</th>
+                            <td>{{ user.email }}</td>
+                          </tr>
+                          <tr>
+                            <th class="text text-capitalize text-primary">{{ 'magazine.field.firstName'|trans }}</th>
+                            <td>
+                              {% if user.firstName == null %}
+                                <div class="text text-capitalize text-danger"> {{  'user.noInfo'|trans }} </div>
+                              {% else %}
+                                {{ user.firstName }}
+                              {% endif %}
+                            </td>
+                          </tr>
+                          <tr>
+                            <th class="text text-capitalize text-primary">{{ 'magazine.field.lastName'|trans }}</th>
+                            <td>
+                              {% if user.lastName == null %}
+                                <div class="text text-capitalize text-danger"> {{  'user.noInfo'|trans }} </div>
+                              {% else %}
+                                {{ user.lastName }}
+                              {% endif %}
+                            </td>
+                          </tr>
+                          <tr>
+                            <th class="text text-capitalize text-primary">{{ 'magazine.field.phone'|trans }}</th>
+                            <td>
+                              {% if user.phone ==  null %}
+                                <div class="text  text-capitalize  text-danger"> {{  'user.noInfo'|trans }} </div>
+                              {% else %}
+                                {{ user.phone }}
+                              {% endif %}
+                            </td>
+                          </tr>
+                          <tr>
+                            <th class="text text-capitalize text-primary">{{ 'magazine.field.function'|trans }}</th>
+                            <td>
+                              {% if user.function == null%}
+                                <div class="text text-capitalize text-danger"> {{  'user.noInfo'|trans }} </div>
+                              {% else %}
+                                {{ user.function }}
+                              {% endif %}
+                            </td>
+                          </tr>
+                          <tr>
+                            <th class="text text-capitalize text-primary">{{ 'profile.show.role'|trans({}, 'FOSUserBundle') }}</th>
+                            <td>{% for val in user.roles %}
+                                  {{ val }} <br>
+                                {% endfor %} </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

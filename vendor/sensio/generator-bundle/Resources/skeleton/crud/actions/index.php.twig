@@ -1,0 +1,70 @@
+    /**
+{% block phpdoc_method_header %}
+     * Lists all {{ entity }} entities.
+{% endblock phpdoc_method_header %}
+     *
+{% block phpdoc_method_annotations %}
+{% if 'annotation' == format %}
+     * @Route("/", name="{{ route_name_prefix }}_index")
+     * @Method("GET")
+{% endif %}
+{% endblock phpdoc_method_annotations %}
+     */
+{% block method_definition %}
+    public function indexAction(Request $request )
+{% endblock method_definition %}
+    {
+{% block method_body %}
+        $repository = $this->getDoctrine()
+                        ->getRepository('{{ bundle }}:{{ entity }}');
+        $query = $repository->createQueryBuilder('f');
+        
+        $form = $this->createSearchForm();
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid() && !empty($form->get('search')->getData())) {
+            $query->where('f.id like :search OR f.designation LIKE :search')
+                    ->setParameter('search', '%'.$form->get('search')->getData().'%')
+                    ->orderBy('f.id', 'ASC');
+        }
+
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            10 /*limit per page*/
+        );
+
+        $deleteForms = array();
+        foreach ($query->getQuery()->getResult() as $entity) {
+            $deleteForms[$entity->getId()] = $this->createDeleteForm($entity)->createView();
+        }
+
+{% endblock method_body %}
+            
+{% block method_return %}
+        return $this->render('{{ entity|lower|replace({'\\': '/'}) }}/index.html.twig', array(
+            'padding' => $pagination,
+            'form'=> $form->createView(),
+            'deleteForms' => $deleteForms
+        ));
+{% endblock method_return %}
+    }
+
+{% block form %}
+    /**
+     * Creates a form to Search a {{ entity }} entity.
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createSearchForm()
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('{{ route_name_prefix }}_index'))
+            ->setMethod('GET')
+            ->add('search')
+            ->getForm();
+        ;
+    }
+{% endblock form %}

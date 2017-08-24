@@ -1,0 +1,15 @@
+<div class="panel">
+    <div class="panel-heading">
+        <h2>{% trans %}menu.user.setting{% endtrans %}</h2>
+    </div>
+    <form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="form-horizontal row-border" novalidate="novalidate">
+        <div class="panel-body">
+            {{ form_widget(form) }}
+        </div>
+        <div class="panel-footer">
+            <div class="pull-right">
+               <input type="submit" class="btn-primary btn" value="{{ 'profile.edit.submit'|trans({}, 'FOSUserBundle') }}" />
+            </div>
+        </div>
+    </form>
+</div>

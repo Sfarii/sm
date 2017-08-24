@@ -1,0 +1,58 @@
+<?php
+
+// ISETSOMagazineBundle:magazine_discharge:new.html.twig
+return array (
+  'e3849eb' => 
+  array (
+    0 => 
+    array (
+      0 => 'bundles/isetsomagazine/plugins/datatables/dataTables.bootstrap.css',
+      1 => 'bundles/isetsomagazine/plugins/datatables/dataTables.themify.css',
+      2 => 'bundles/isetsomagazine/plugins/form-select2/select2.css',
+      3 => 'bundles/isetsomagazine/css/cssload-finger.css',
+    ),
+    1 => 
+    array (
+      0 => 'cssrewrite',
+    ),
+    2 => 
+    array (
+      'output' => '_controller/css/e3849eb.css',
+      'name' => 'e3849eb',
+      'debug' => NULL,
+      'combine' => NULL,
+      'vars' => 
+      array (
+      ),
+    ),
+  ),
+  '36a000b' => 
+  array (
+    0 => 
+    array (
+      0 => 'bundles/isetsomagazine/plugins/datatables/jquery.dataTables.js',
+      1 => 'bundles/isetsomagazine/plugins/datatables/dataTables.bootstrap.js',
+      2 => 'bundles/isetsomagazine/myjs/datatables.js',
+      3 => 'bundles/isetsomagazine/plugins/form-select2/select2.min.js',
+      4 => 'bundles/isetsomagazine/myPlugins/discharge_article.js',
+      5 => 'bundles/isetsomagazine/myjs/add_discharge_user_article_from_subStore.js',
+      6 => 'bundles/isetsomagazine/plugins/form-daterangepicker/moment.min.js',
+      7 => 'bundles/isetsomagazine/plugins/bootstrap-datepicker/bootstrap-datepicker.js',
+      8 => 'bundles/isetsomagazine/myjs/date.js',
+    ),
+    1 => 
+    array (
+      0 => '?yui_js',
+    ),
+    2 => 
+    array (
+      'output' => '_controller/js/36a000b.js',
+      'name' => '36a000b',
+      'debug' => NULL,
+      'combine' => NULL,
+      'vars' => 
+      array (
+      ),
+    ),
+  ),
+);
