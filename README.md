@@ -6,7 +6,7 @@ The Stock Management System Module will help to maintain all records of school s
 Requirements
 ------------
 
-  * PHP 7.1.3 or higher;
+  * PHP 5.6 or higher;
   * PDO-SQLite PHP extension enabled;
   * and the [usual Symfony application requirements][2].
 
@@ -18,7 +18,7 @@ Installation
 Now clone the project from github.
 
 ```bash
-$ git clone https://github.com/Sfarii/symfony-sms.git
+$ git clone https://github.com/Sfarii/symfony-sm.git
 ```
 
 ### Step 2 : Install dependencies
